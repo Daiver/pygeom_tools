@@ -33,7 +33,7 @@ def from_obj_string(string, triangulate=True):
             vertices.append([float(x) for x in tokens[1:]])
         elif tokens[0] == "vt":
             assert len(tokens) in [3, 4]
-            texture_vertices.append([float(x) for x in tokens[1:]])
+            texture_vertices.append([float(x) for x in tokens[1:3]])
         elif tokens[0] == "f":
             assert len(tokens) >= 3
             vertex_face = []
