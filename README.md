@@ -8,8 +8,8 @@ It's pretty dirty and slow. No obj file validation. Also it supports only vertic
 ```python
     path_to_obj = "models/teapot.obj"
     model = geom_tools.from_obj_file(path_to_obj)
-    print(f"Model loaded, n vertices: "
-          f"{model.n_vertices()}, "
+    print(f"Model loaded, "
+          f"n vertices: {model.n_vertices()}, "
           f"n vts: {model.n_texture_vertices()}, "
           f"n polygons: {model.n_polygons()}, "
           f"n triangles: {model.n_triangles()}")
