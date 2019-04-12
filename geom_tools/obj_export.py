@@ -3,12 +3,12 @@ import numpy as np
 from .mesh import Mesh
 
 
-def save(path: str, mesh: Mesh, save_normals=False):
+def save(mesh: Mesh, path: str, save_normals=False):
     with open(path, "w") as f:
-        save_to_stream(f, mesh, save_normals=save_normals)
+        save_to_stream(mesh, f, save_normals=save_normals)
 
 
-def save_to_stream(stream: io.TextIOWrapper, mesh: Mesh, save_normals=False):
+def save_to_stream(mesh: Mesh, stream: io.TextIOWrapper, save_normals=False):
     assert not save_normals
     _write_vertices(mesh.vertices, stream)
     stream.write("\n")
@@ -42,3 +42,6 @@ def _write_faces(polygon_vertex_indices, texture_polygon_vertex_indices, stream:
             line = " ".join(f"{v_ind + 1}" for v_ind in v_face)
             stream.write(f"f {line}\n")
 
+
+def export_vertices_by_existing_obj():
+    assert False

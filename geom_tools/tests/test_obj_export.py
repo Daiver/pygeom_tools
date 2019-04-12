@@ -19,7 +19,7 @@ class TestObjParser(unittest.TestCase):
         )
 
         stream = io.StringIO()
-        geom_tools.save_to_stream(stream, mesh)
+        geom_tools.save_to_stream(mesh, stream)
         res = stream.getvalue()
         ans = """\
 v 1.0 0.0 0.0
@@ -45,7 +45,7 @@ f 1 2 3
         )
 
         stream = io.StringIO()
-        geom_tools.save_to_stream(stream, mesh)
+        geom_tools.save_to_stream(mesh, stream)
         res = stream.getvalue()
         ans = """\
 v 1.0 0.0 0.0
@@ -79,7 +79,7 @@ f 4 2 3
         )
 
         stream = io.StringIO()
-        geom_tools.save_to_stream(stream, mesh)
+        geom_tools.save_to_stream(mesh, stream)
         res = stream.getvalue()
         ans = """\
 v 1.0 0.0 0.0
@@ -120,7 +120,7 @@ f 1/3 2/1 3/2
         )
 
         stream = io.StringIO()
-        geom_tools.save_to_stream(stream, mesh)
+        geom_tools.save_to_stream(mesh, stream)
         res = stream.getvalue()
         ans = """\
 v 1.0 0.0 0.0
