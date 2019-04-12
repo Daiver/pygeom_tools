@@ -138,6 +138,43 @@ f 2/1 3/3 1/4
 """
         self.assertEqual(res, ans)
 
+    def test_export_vertices_by_existing_obj_stream01(self):
+        orig_str = """\
+v 1 2 3
+# some comment
+v 3 4 5
+v 11 23 5
+
+g some polygroup
+f 1 2 4
+g yet another usefull stuff
+f 3 5 2 42 
+
+"""
+        vertices = np.array([
+            [-1, 2, 3],
+            [4, 5, 0],
+            [16, -3, 0.5],
+        ], dtype=np.float32)
+        inp = io.StringIO(orig_str)
+        out = io.StringIO()
+        geom_tools.export_vertices_by_existing_obj_stream(vertices, inp, out)
+        res = out.getvalue()
+
+        ans = """\
+v -1.0 2.0 3.0
+# some comment
+v 4.0 5.0 0.0
+v 16.0 -3.0 0.5
+
+g some polygroup
+f 1 2 4
+g yet another usefull stuff
+f 3 5 2 42 
+
+"""
+        self.assertEqual(res, ans)
+
 
 if __name__ == '__main__':
     unittest.main()

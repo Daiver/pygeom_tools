@@ -18,8 +18,10 @@ It's pretty dirty and slow. No obj file validation. Also it supports only vertic
     print(model.triangle_vertex_indices[:5])  # Fan like triangulation of topology. Keep original triangles
 
     model.vertices[0] = (1, 2, 3)
-    geom_tools.save(model, "res.obj")
+    geom_tools.save(model, "res.obj")    
 ```
+
+Also see `export_vertices_by_existing_obj`, `export_vertices_by_existing_obj_stream`
 
 # Installation
 

@@ -1,3 +1,4 @@
+import os
 import io
 import numpy as np
 from .mesh import Mesh
@@ -43,5 +44,22 @@ def _write_faces(polygon_vertex_indices, texture_polygon_vertex_indices, stream:
             stream.write(f"f {line}\n")
 
 
-def export_vertices_by_existing_obj():
-    assert False
+def export_vertices_by_existing_obj(vertices: np.ndarray, src_path: str, dst_path: str):
+    assert os.path.exists(src_path)
+    with open(src_path) as inp:
+        with open(dst_path, "w") as out:
+            export_vertices_by_existing_obj_stream(vertices, inp, out)
+
+
+def export_vertices_by_existing_obj_stream(
+        vertices: np.ndarray,
+        src_stream: io.TextIOWrapper,
+        dst_stream: io.TextIOWrapper):
+    v_ind = 0
+    for line in src_stream:
+        if line[0] == "v":
+            assert v_ind < len(vertices)
+            dst_stream.write(f"v {vertices[v_ind, 0]} {vertices[v_ind, 1]} {vertices[v_ind, 2]}\n")
+            v_ind += 1
+        else:
+            dst_stream.write(line)
