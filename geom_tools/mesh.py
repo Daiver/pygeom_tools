@@ -25,8 +25,18 @@ class Mesh:
         return len(self.vertices)
 
     def n_texture_vertices(self) -> int:
-        assert self.has_uv()
-        return len(self.texture_vertices)
+        if self.has_uv():
+            return len(self.texture_vertices)
+        return 0
+
+    def n_polygons(self) -> int:
+        return len(self.polygon_vertex_indices)
+
+    def n_triangles(self):
+        if self.has_triangulated():
+            return len(self.triangle_vertex_indices)
+        else:
+            return None
 
     def has_uv(self) -> bool:
         return self.texture_vertices is not None
