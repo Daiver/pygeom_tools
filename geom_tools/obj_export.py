@@ -57,7 +57,7 @@ def export_vertices_by_existing_obj_stream(
         dst_stream: io.TextIOWrapper):
     v_ind = 0
     for line in src_stream:
-        if line[0] == "v":
+        if line[0:2] == "v ":
             assert v_ind < len(vertices)
             dst_stream.write(f"v {vertices[v_ind, 0]} {vertices[v_ind, 1]} {vertices[v_ind, 2]}\n")
             v_ind += 1
