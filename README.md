@@ -25,7 +25,7 @@ It's pretty dirty and slow. No obj file validation. Also it supports only vertic
     geom_tools.save(model, "res.obj")    
 ```
 
-Also see `export_vertices_by_existing_obj`, `export_vertices_by_existing_obj_stream`
+See `geom_tools.mesh.Mesh` for more details. For saving stuff see `export_vertices_by_existing_obj`, `export_vertices_by_existing_obj_stream`
 
 # Installation
 
