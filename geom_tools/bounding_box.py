@@ -16,6 +16,12 @@ class BoundingBox:
         return (is_arrays_equal(self._smallest_corner, other._smallest_corner) and
                 is_arrays_equal(self._biggest_corner, other._biggest_corner))
 
+    def __repr__(self) -> str:
+        return "BoundingBox([{}, {}, {}], [{}, {}, {}])".format(
+            self._smallest_corner[0], self._smallest_corner[1], self._smallest_corner[2],
+            self._biggest_corner[0], self._biggest_corner[1], self._biggest_corner[2]
+        )
+
     def smallest_corner(self):
         return self._smallest_corner
 

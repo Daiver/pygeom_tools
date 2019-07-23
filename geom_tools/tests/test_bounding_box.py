@@ -67,3 +67,13 @@ class TestMesh(unittest.TestCase):
         ]
         res = from_vertices(vertices)
         self.assertEqual(BoundingBox([1, 1, 1], [5, 5, 5]), res)
+
+    def test_repr01(self):
+        ans = "BoundingBox([0.0, 0.0, 0.0], [1.0, 1.0, 1.0])"
+        res = str(BoundingBox([0, 0, 0], [1, 1, 1]))
+        self.assertEqual(ans, res)
+
+    def test_repr02(self):
+        ans = "BoundingBox([-1.0, 0.0, 0.0], [1.0, 1.0, 6.0])"
+        res = str(BoundingBox([-1, 0, 0], [1, 1, 6]))
+        self.assertEqual(ans, res)
