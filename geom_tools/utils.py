@@ -2,6 +2,8 @@ import numpy as np
 
 
 def is_arrays_equal(a: np.ndarray, b: np.ndarray):
+    a = np.array(a)
+    b = np.array(b)
     if a.shape != b.shape:
         return False
     return np.allclose(a, b)

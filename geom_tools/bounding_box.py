@@ -8,6 +8,9 @@ class BoundingBox:
         biggest_corner = np.array(biggest_corner, dtype=np.float32)
         assert smallest_corner.shape == (3,)
         assert biggest_corner.shape == (3,)
+
+        assert all(smallest_corner <= biggest_corner)
+
         self._smallest_corner = smallest_corner
         self._biggest_corner = biggest_corner
 
@@ -27,6 +30,9 @@ class BoundingBox:
 
     def biggest_corner(self):
         return self._biggest_corner
+
+    def size(self):
+        return self._biggest_corner - self._smallest_corner
 
 
 def from_vertices(vertices):

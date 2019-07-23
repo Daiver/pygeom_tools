@@ -77,3 +77,11 @@ class TestMesh(unittest.TestCase):
         ans = "BoundingBox([-1.0, 0.0, 0.0], [1.0, 1.0, 6.0])"
         res = str(BoundingBox([-1, 0, 0], [1, 1, 6]))
         self.assertEqual(ans, res)
+
+    def test_size01(self):
+        size = BoundingBox([0, 0, 0], [1, 1, 1]).size()
+        self.assertTrue(is_arrays_equal(size, [1, 1, 1]))
+
+    def test_size02(self):
+        size = BoundingBox([-8, 7, -5], [-4, 10, 1]).size()
+        self.assertTrue(is_arrays_equal(size, [4, 3, 6]))
