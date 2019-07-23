@@ -1,6 +1,7 @@
 import numpy as np
 
 from .utils import is_arrays_equal
+from .bounding_box import from_vertices, BoundingBox
 
 
 # TODO: asserts for consistent texture information
@@ -8,11 +9,11 @@ class Mesh:
     def __init__(self,
                  vertices: np.ndarray,
                  polygon_vertex_indices: list,
-                 texture_vertices: np.ndarray=None,
-                 texture_polygon_vertex_indices: list=None,
-                 normals: np.ndarray=None,
-                 triangle_vertex_indices: list=None,
-                 triangle_texture_vertex_indices: list=None):
+                 texture_vertices: np.ndarray = None,
+                 texture_polygon_vertex_indices: list = None,
+                 normals: np.ndarray = None,
+                 triangle_vertex_indices: list = None,
+                 triangle_texture_vertex_indices: list = None):
         self.vertices = vertices
         self.polygon_vertex_indices = polygon_vertex_indices
         self.texture_vertices = texture_vertices
@@ -75,3 +76,6 @@ class Mesh:
             return False
 
         return True
+
+    def bbox(self) -> BoundingBox:
+        return from_vertices(self.vertices)

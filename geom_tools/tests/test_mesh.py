@@ -2,6 +2,7 @@ import unittest
 
 import numpy as np
 from geom_tools import Mesh
+from geom_tools.bounding_box import BoundingBox
 
 
 class TestMesh(unittest.TestCase):
@@ -89,3 +90,12 @@ class TestMesh(unittest.TestCase):
                 [4, 6, 8],
             ])
         self.assertEqual(mesh1.n_triangles(), 3)
+
+    def test_mesh_bbox01(self):
+        mesh1 = Mesh(
+            vertices=np.array([[0, 1, 2], [-5, 2, 3]]), polygon_vertex_indices=[
+                [0, 1, 2],
+                [4, 5, 6, 8],
+            ])
+        bbox = mesh1.bbox()
+        self.assertEqual(BoundingBox([-5, 1, 2], [0, 2, 3]), bbox)
