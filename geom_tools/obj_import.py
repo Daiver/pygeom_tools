@@ -4,6 +4,11 @@ from .mesh import Mesh
 from .utils import triangulate_polygons
 
 
+# Just for simplicity
+def load(file_name, triangulate=True):
+    return from_obj_file(file_name=file_name, triangulate=triangulate)
+
+
 # Currently normals are not supported
 # TODO: not effective, use file streams or something like this
 def from_obj_file(file_name, triangulate=True):
