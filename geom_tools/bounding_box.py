@@ -28,7 +28,7 @@ def from_vertices(vertices):
     assert vertices.ndim == 2
     assert vertices.shape[1] == 3
 
-    smallest_corner = [0, 0, 0]
-    biggest_corner = [1, 1, 1]
+    smallest_corner = vertices.min(axis=0)
+    biggest_corner = vertices.max(axis=0)
 
     return BoundingBox(smallest_corner=smallest_corner, biggest_corner=biggest_corner)
