@@ -2,7 +2,7 @@ import setuptools
 
 setuptools.setup(
     name="geom_tools",
-    version="0.1.0",
+    version="0.1.1",
     author="Daiver",
     author_email="ra22341@ya.ru",
     description="",
