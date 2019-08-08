@@ -70,9 +70,9 @@ class Mesh:
             if not is_arrays_equal(self.normals, other.normals):
                 return False
 
-        if not self.triangle_vertex_indices == other.triangle_vertex_indices:
+        if self.triangle_vertex_indices != other.triangle_vertex_indices:
             return False
-        if not self.triangle_texture_vertex_indices == other.triangle_texture_vertex_indices:
+        if self.triangle_texture_vertex_indices != other.triangle_texture_vertex_indices:
             return False
 
         return True
