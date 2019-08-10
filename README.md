@@ -29,8 +29,17 @@ See `geom_tools.mesh.Mesh` for more details. For saving stuff see `export_vertic
 
 # Installation
 
+## Pip
+
 ```
 pip3 install git+https://github.com/Daiver/pygeom_tools
+```
+
+## Manual
+```
+git clone https://github.com/Daiver/pygeom_tools
+cd pygeom_tools
+python3 setup.py install
 ```
 
 # Features
