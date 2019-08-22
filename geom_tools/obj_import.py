@@ -12,7 +12,6 @@ def load(file_name, triangulate=True):
 # Currently normals are not supported
 # TODO: not effective, use file streams or something like this
 def from_obj_file(file_name, triangulate=True):
-    assert os.path.exists(file_name)
     with open(file_name) as f:
         string = f.read()
         return from_obj_string(string, triangulate=triangulate)

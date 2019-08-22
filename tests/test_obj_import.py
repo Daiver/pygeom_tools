@@ -262,6 +262,9 @@ class TestObjParser(unittest.TestCase):
         )
         self.assertTrue(res == ans)
 
+    def test_file_not_found01(self):
+        self.assertRaises(FileNotFoundError, geom_tools.load, "123")
+
 
 if __name__ == '__main__':
     unittest.main()
