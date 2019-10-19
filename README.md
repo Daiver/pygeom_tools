@@ -122,3 +122,11 @@ res = geom_tools.transform_vertices(transformation, vertices)
 # ]
 ```
 
+### fit_to_view_transform
+
+```python
+import geom_tools
+# Untested, returns transform which fit vertices to ortho camera 
+geom_tools.fit_to_view_transform(bbox=geom_tools.BoundingBox(), canvas_size=(width, height))
+
+```

@@ -1,6 +1,8 @@
 from typing import List, Tuple, Union
 import numpy as np
 
+from .bounding_box import BoundingBox
+
 
 def rotated_and_translated(
         rotation_matrix: Union[List[List[float]], np.ndarray],
@@ -50,3 +52,23 @@ def rotation_around_vertex(
 
     return rotation_matrix, -rotation_matrix @ rotation_center + rotation_center + translation
 
+
+def fit_to_view_transform(bbox: BoundingBox, canvas_size: (int, int)) -> (np.ndarray, np.ndarray):
+    """
+    Untested, fit vertices to z aligned ortho camera box
+    :param bbox:
+    :param canvas_size:
+    :return:
+    """
+    center = bbox.center()
+    size = bbox.size()
+    scale = np.max(canvas_size) / size.max()
+
+    mat = np.array([
+        [scale, 0, 0],
+        [0, -scale, 0],
+        [0, 0, scale],
+    ], dtype=np.float32)
+    trans = -mat @ center + [canvas_size[0] / 2.0, canvas_size[1] / 2.0, 0]
+
+    return mat, trans
