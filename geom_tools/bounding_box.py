@@ -1,9 +1,14 @@
+from typing import List, Tuple, Union
 import numpy as np
 from .utils import is_arrays_equal
 
 
 class BoundingBox:
-    def __init__(self, smallest_corner, biggest_corner):
+    def __init__(
+            self,
+            smallest_corner: Union[List[float], Tuple[float, float, float], np.ndarray],
+            biggest_corner: Union[List[float], Tuple[float, float, float], np.ndarray],
+    ):
         smallest_corner = np.array(smallest_corner, dtype=np.float32)
         biggest_corner = np.array(biggest_corner, dtype=np.float32)
         assert smallest_corner.shape == (3,)
@@ -14,7 +19,7 @@ class BoundingBox:
         self._smallest_corner = smallest_corner
         self._biggest_corner = biggest_corner
 
-    def __eq__(self, other) -> bool:
+    def __eq__(self, other: "BoundingBox") -> bool:
         assert isinstance(other, BoundingBox)
         return (is_arrays_equal(self._smallest_corner, other._smallest_corner) and
                 is_arrays_equal(self._biggest_corner, other._biggest_corner))
@@ -25,17 +30,17 @@ class BoundingBox:
             self._biggest_corner[0], self._biggest_corner[1], self._biggest_corner[2]
         )
 
-    def smallest_corner(self):
+    def smallest_corner(self) -> np.ndarray:
         return self._smallest_corner
 
-    def biggest_corner(self):
+    def biggest_corner(self) -> np.ndarray:
         return self._biggest_corner
 
-    def size(self):
+    def size(self) -> np.ndarray:
         return self._biggest_corner - self._smallest_corner
 
 
-def from_vertices(vertices):
+def from_vertices(vertices: Union[List[List[float]], np.ndarray]) -> BoundingBox:
     vertices = np.array(vertices, dtype=np.float32)
     assert vertices.ndim == 2
     assert vertices.shape[1] == 3
