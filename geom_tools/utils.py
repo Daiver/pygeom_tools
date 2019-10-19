@@ -2,7 +2,10 @@ from typing import List, Union
 import numpy as np
 
 
-def is_arrays_equal(a: Union[List[float], np.ndarray], b: Union[List[float], np.ndarray]):
+def is_arrays_equal(
+        a: Union[List[float], List[List[float]], np.ndarray],
+        b: Union[List[float], List[List[float]], np.ndarray]
+):
     a = np.array(a)
     b = np.array(b)
     if a.shape != b.shape:

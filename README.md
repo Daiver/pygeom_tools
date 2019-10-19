@@ -53,3 +53,29 @@ mesh = Mesh(
 print(mesh.bbox())
 # prints: BoundingBox([-5, 1, 2], [1, 2, 3])
 ```
+
+## Vertices transformations
+
+```python
+import geom_tools
+matrix = [
+    [0, 1, 0],
+    [1, 0, 0],
+    [2, 0, 0]
+]
+vector = [2, 0, 3]
+
+res = geom_tools.transform_vertices(
+    matrix=matrix, vector=vector,
+    vertices=[
+        [0, 0, 0],
+        [1, 0, 5],
+    ]
+)
+print(res)    
+# res = [
+#     [2, 0, 3],
+#     [2, 1, 5],
+# ]
+
+```
