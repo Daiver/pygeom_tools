@@ -39,6 +39,9 @@ class BoundingBox:
     def size(self) -> np.ndarray:
         return self._biggest_corner - self._smallest_corner
 
+    def center(self) -> np.ndarray:
+        return self._smallest_corner + self.size() / 2.0
+
 
 def from_vertices(vertices: Union[List[List[float]], np.ndarray]) -> BoundingBox:
     vertices = np.array(vertices, dtype=np.float32)

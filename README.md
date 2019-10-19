@@ -47,11 +47,18 @@ python3 setup.py install
 
 ```python
 import numpy as np
-from geom_tools import Mesh
+from geom_tools import Mesh, BoundingBox
 mesh = Mesh(
     vertices=np.array([[0, 1, 2], [1, 1, 2], [-5, 2, 3]]), polygon_vertex_indices=[[0, 1, 2]])
 print(mesh.bbox())
 # prints: BoundingBox([-5, 1, 2], [1, 2, 3])
+
+# A lot of different helpers
+bbox = BoundingBox([2, 1, 0], [3, 2, 1])
+bbox.center()  # [2.5, 1.5, 0.5]
+bbox.size()  # [0.5, 0.5, 0.5]
+bbox.biggest_corner()  # [3, 2, 1]
+bbox.smallest_corner()  # [2, 1, 0] 
 ```
 
 ## Vertices transformations

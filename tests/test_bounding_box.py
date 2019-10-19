@@ -85,3 +85,15 @@ class TestMesh(unittest.TestCase):
     def test_size02(self):
         size = BoundingBox([-8, 7, -5], [-4, 10, 1]).size()
         self.assertTrue(is_arrays_equal(size, [4, 3, 6]))
+
+    def test_center01(self):
+        res = BoundingBox([0, 0, 0], [6, 3, 2]).center()
+        self.assertTrue(is_arrays_equal(res, [3, 1.5, 1.0]))
+
+    def test_center02(self):
+        res = BoundingBox([-6, -3, -2], [0, 0, 0]).center()
+        self.assertTrue(is_arrays_equal(res, [-3, -1.5, -1.0]))
+
+    def test_center03(self):
+        res = BoundingBox([2, 1, 0], [3, 2, 1]).center()
+        self.assertTrue(is_arrays_equal(res, [2.5, 1.5, 0.5]))
