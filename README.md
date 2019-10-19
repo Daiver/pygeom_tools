@@ -65,8 +65,8 @@ matrix = [
 ]
 vector = [2, 0, 3]
 
-res = geom_tools.transform_vertices(
-    matrix=matrix, vector=vector,
+res = geom_tools.rotated_and_translated(
+    rotation_matrix=matrix, translation=vector,
     vertices=[
         [0, 0, 0],
         [1, 0, 5],
@@ -78,4 +78,12 @@ print(res)
 #     [2, 1, 5],
 # ]
 
+# Alternative syntax:
+res = geom_tools.transform_vertices(
+    (matrix, vector),
+    vertices=[
+        [0, 0, 0],
+        [1, 0, 5],
+    ]
+)
 ```

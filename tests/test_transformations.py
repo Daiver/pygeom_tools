@@ -6,7 +6,7 @@ from geom_tools.utils import is_arrays_equal
 
 
 class TestTransformations(unittest.TestCase):
-    def test_transform_vertices01(self):
+    def test_rotated_and_translated01(self):
         matrix = [
             [1, 0, 0],
             [0, 1, 0],
@@ -14,7 +14,7 @@ class TestTransformations(unittest.TestCase):
         ]
         vector = [0, 0, 0]
 
-        res = geom_tools.transform_vertices(
+        res = geom_tools.rotated_and_translated(
             matrix, vector,
             vertices=[
                 [0, 0, 0]
@@ -27,7 +27,7 @@ class TestTransformations(unittest.TestCase):
             ]
         ))
 
-        res = geom_tools.transform_vertices(
+        res = geom_tools.rotated_and_translated(
             matrix, vector,
             vertices=[
                 [5, -3, 6],
@@ -42,7 +42,7 @@ class TestTransformations(unittest.TestCase):
             ]
         ))
 
-        res = geom_tools.transform_vertices(
+        res = geom_tools.rotated_and_translated(
             matrix, vector,
             vertices=[
                 [5, -3, 6],
@@ -58,7 +58,7 @@ class TestTransformations(unittest.TestCase):
                 [-4.5, 55, 1]
             ]
         ))
-        res = geom_tools.transform_vertices(
+        res = geom_tools.rotated_and_translated(
             matrix, vector,
             vertices=[
                 [5, -3, 6],
@@ -77,7 +77,7 @@ class TestTransformations(unittest.TestCase):
             ]
         ))
 
-    def test_transform_vertices02(self):
+    def test_rotated_and_translated02(self):
         matrix = [
             [1, 0, 0],
             [0, 1, 0],
@@ -85,7 +85,7 @@ class TestTransformations(unittest.TestCase):
         ]
         vector = [0, 5, 0]
 
-        res = geom_tools.transform_vertices(
+        res = geom_tools.rotated_and_translated(
             matrix, vector,
             vertices=[
                 [0, 0, 0]
@@ -98,7 +98,7 @@ class TestTransformations(unittest.TestCase):
             ]
         ))
 
-        res = geom_tools.transform_vertices(
+        res = geom_tools.rotated_and_translated(
             matrix, vector,
             vertices=[
                 [5, -3, 6],
@@ -113,7 +113,7 @@ class TestTransformations(unittest.TestCase):
             ]
         ))
 
-        res = geom_tools.transform_vertices(
+        res = geom_tools.rotated_and_translated(
             matrix, vector,
             vertices=[
                 [5, -3, 6],
@@ -129,7 +129,7 @@ class TestTransformations(unittest.TestCase):
                 [-4.5, 60, 1]
             ]
         ))
-        res = geom_tools.transform_vertices(
+        res = geom_tools.rotated_and_translated(
             matrix, vector,
             vertices=[
                 [5, -3, 6],
@@ -148,7 +148,7 @@ class TestTransformations(unittest.TestCase):
             ]
         ))
 
-    def test_transform_vertices03(self):
+    def test_rotated_and_translated03(self):
         matrix = [
             [0.5, 0, 0],
             [0, 2, 0],
@@ -156,7 +156,7 @@ class TestTransformations(unittest.TestCase):
         ]
         vector = [0, 0, 0]
 
-        res = geom_tools.transform_vertices(
+        res = geom_tools.rotated_and_translated(
             matrix, vector,
             vertices=[
                 [0, 0, 0],
@@ -171,7 +171,7 @@ class TestTransformations(unittest.TestCase):
             ]
         ))
 
-    def test_transform_vertices04(self):
+    def test_rotated_and_translated04(self):
         matrix = [
             [0, 1, 0],
             [1, 0, 0],
@@ -179,7 +179,7 @@ class TestTransformations(unittest.TestCase):
         ]
         vector = [0, 0, 0]
 
-        res = geom_tools.transform_vertices(
+        res = geom_tools.rotated_and_translated(
             matrix, vector,
             vertices=[
                 [0, 0, 0],
@@ -196,7 +196,30 @@ class TestTransformations(unittest.TestCase):
             ]
         ))
 
-    def test_transform_vertices05(self):
+    def test_rotated_and_translated05(self):
+        matrix = [
+            [0, 1, 0],
+            [1, 0, 0],
+            [2, 0, 0]
+        ]
+        vector = [2, 0, 3]
+
+        res = geom_tools.rotated_and_translated(
+            rotation_matrix=matrix, translation=vector,
+            vertices=[
+                [0, 0, 0],
+                [1, 0, 5],
+            ]
+        )
+        self.assertTrue(is_arrays_equal(
+            res,
+            [
+                [2, 0, 3],
+                [2, 1, 5],
+            ]
+        ))
+
+    def test_rotated_and_translated06(self):
         matrix = [
             [0, 1, 0],
             [1, 0, 0],
@@ -205,7 +228,7 @@ class TestTransformations(unittest.TestCase):
         vector = [2, 0, 3]
 
         res = geom_tools.transform_vertices(
-            matrix=matrix, vector=vector,
+            (matrix, vector),
             vertices=[
                 [0, 0, 0],
                 [1, 0, 5],
