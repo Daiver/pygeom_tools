@@ -34,9 +34,19 @@ def transform_vertices(
 
 
 def rotation_around_vertex(
-        rotation: Union[List[List[float]], np.ndarray],
+        rotation_matrix: Union[List[List[float]], np.ndarray],
         rotation_center: Union[List[float], np.ndarray],
-        additional_translation: Union[List[float], np.ndarray],
-) -> np.ndarray:
-    raise NotImplementedError
-    pass
+        translation: Union[List[float], np.ndarray] = None,
+) -> Tuple[np.ndarray, np.ndarray]:
+    rotation_matrix = np.array(rotation_matrix, dtype=np.float32)
+    rotation_center = np.array(rotation_center, dtype=np.float32)
+    if translation is None:
+        translation = np.zeros((3,), dtype=np.float32)
+    translation = np.array(translation, dtype=np.float32)
+
+    assert rotation_matrix.ndim == 2 and rotation_matrix.shape == (3, 3)
+    assert rotation_center.ndim == 1 and rotation_center.shape[0] == 3
+    assert translation.ndim == 1 and translation.shape[0] == 3
+
+    return rotation_matrix, -rotation_matrix @ rotation_center + rotation_center + translation
+

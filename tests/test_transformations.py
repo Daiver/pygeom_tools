@@ -242,6 +242,48 @@ class TestTransformations(unittest.TestCase):
             ]
         ))
 
+    def test_rotation_around_vertex01(self):
+        rotation = [
+            [0, -1, 0],
+            [1, 0, 0],
+            [0, 0, 1]
+        ]
+        center = [0, 2, 0]
+        transformation = geom_tools.rotation_around_vertex(rotation, center)
+        vertices = [
+            [1, 0, 0],
+            [0, 1, 0],
+            [0, 0, 1],
+        ]
+        res = geom_tools.transform_vertices(transformation, vertices)
+        ans = [
+            [2, 3, 0],
+            [1, 2, 0],
+            [2, 2, 1],
+        ]
+        self.assertTrue(is_arrays_equal(ans, res))
+
+    def test_rotation_around_vertex02(self):
+        rotation = [
+            [0, -1, 0],
+            [1, 0, 0],
+            [0, 0, 1]
+        ]
+        center = [0, 2, 0]
+        transformation = geom_tools.rotation_around_vertex(rotation, center, translation=[1, 2, 6])
+        vertices = [
+            [1, 0, 0],
+            [0, 1, 0],
+            [0, 0, 1],
+        ]
+        res = geom_tools.transform_vertices(transformation, vertices)
+        ans = [
+            [3, 5, 6],
+            [2, 4, 6],
+            [3, 4, 7],
+        ]
+        self.assertTrue(is_arrays_equal(ans, res))
+
 
 if __name__ == '__main__':
     unittest.main()

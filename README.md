@@ -56,6 +56,8 @@ print(mesh.bbox())
 
 ## Vertices transformations
 
+### Simple transformations
+
 ```python
 import geom_tools
 matrix = [
@@ -87,3 +89,29 @@ res = geom_tools.transform_vertices(
     ]
 )
 ```
+
+### Rotation around vertex to convinient transformation
+
+```python
+import geom_tools
+
+rotation = [
+    [0, -1, 0],
+    [1, 0, 0],
+    [0, 0, 1]
+]
+center = [0, 2, 0]
+transformation = geom_tools.rotation_around_vertex(rotation, center, translation=[1, 2, 6])
+vertices = [
+    [1, 0, 0],
+    [0, 1, 0],
+    [0, 0, 1],
+]
+res = geom_tools.transform_vertices(transformation, vertices)
+# res = [
+#     [3, 5, 6],
+#     [2, 4, 6],
+#     [3, 4, 7],
+# ]
+```
+
