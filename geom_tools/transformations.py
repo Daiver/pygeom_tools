@@ -35,6 +35,13 @@ def transform_vertices(
     return rotated_and_translated(transformation[0], transformation[1], vertices)
 
 
+def rotated(
+        rotation_matrix: Union[List[List[float]], np.ndarray],
+        vertices: Union[List[List[float]], np.ndarray]
+) -> np.ndarray:
+    return rotated_and_translated(rotation_matrix=rotation_matrix, translation=[0, 0, 0], vertices=vertices)
+
+
 def rotation_around_vertex(
         rotation_matrix: Union[List[List[float]], np.ndarray],
         rotation_center: Union[List[float], np.ndarray],

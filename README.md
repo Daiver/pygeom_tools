@@ -95,9 +95,19 @@ res = geom_tools.transform_vertices(
         [1, 0, 5],
     ]
 )
+
+# Yet another alternative with zero translation
+res = geom_tools.rotated(
+    rotation_matrix=matrix, 
+    vertices=[
+        [0, 0, 0],
+        [1, 0, 5],
+    ]
+)
+
 ```
 
-### Rotation around vertex to convinient transformation
+### Rotation around vertex to convenient transformation
 
 ```python
 import geom_tools

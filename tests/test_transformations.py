@@ -242,6 +242,30 @@ class TestTransformations(unittest.TestCase):
             ]
         ))
 
+    def test_rotated01(self):
+        matrix = [
+            [0, 1, 0],
+            [1, 0, 0],
+            [0, 0, 1]
+        ]
+
+        res = geom_tools.rotated(
+            matrix,
+            vertices=[
+                [0, 0, 0],
+                [1, 0, 5],
+                [0, 3, -5],
+            ]
+        )
+        self.assertTrue(is_arrays_equal(
+            res,
+            [
+                [0, 0, 0],
+                [0, 1, 5],
+                [3, 0, -5],
+            ]
+        ))
+
     def test_rotation_around_vertex01(self):
         rotation = [
             [0, -1, 0],

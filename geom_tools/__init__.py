@@ -9,6 +9,7 @@ from .bounding_box import BoundingBox
 from .print_tools import summary
 from .transformations import (
     rotated_and_translated,
+    rotated,
     transform_vertices,
     rotation_around_vertex,
     fit_to_view_transform
