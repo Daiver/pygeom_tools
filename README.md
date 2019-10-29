@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.com/Daiver/pygeom_tools.svg?branch=master)](https://travis-ci.com/Daiver/pygeom_tools)
 
-[WIP] Simple tools for wavefront obj loading.
+[WIP] Simple tools for wavefront obj IO and processing.
 
 It's pretty dirty and slow. No obj file validation. Also it supports only vertices, uv and basic topology. Normals, polygroups, materials, etc, will be ignored 
 
