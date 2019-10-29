@@ -1,0 +1,7 @@
+language: python
+
+install:
+- pip install --upgrade pip pytest
+
+script:
+- pytest
