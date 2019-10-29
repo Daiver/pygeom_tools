@@ -19,7 +19,7 @@ def main():
     print(model.polygon_vertex_indices[:5])  # List of lists, same for texture topology, triangulated topology, etc
     print(model.triangle_vertex_indices[:5])  # Fan like triangulation of topology. Keep original triangles
 
-    canvas_size = (600, 500)
+    canvas_size = (300, 250)
     fit_to_view_transformation = geom_tools.fit_to_view_transform(
         bbox=model.bbox(),
         canvas_size=canvas_size

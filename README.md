@@ -46,6 +46,8 @@ cv2.waitKey()
 
 ```
 
+Result render:
+
 ![render example](./pics/render.png)
 
 
