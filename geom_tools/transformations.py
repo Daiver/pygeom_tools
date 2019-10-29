@@ -69,7 +69,7 @@ def fit_to_view_transform(bbox: BoundingBox, canvas_size: (int, int)) -> (np.nda
     """
     center = bbox.center()
     size = bbox.size()
-    scale = np.max(canvas_size) / size.max()
+    scale = np.min(canvas_size) / size[:2].max()
 
     mat = np.array([
         [scale, 0, 0],
