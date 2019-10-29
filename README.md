@@ -46,7 +46,7 @@ cv2.waitKey()
 
 ```
 
-![render example](https://github.com/Daiver/pygeom_tools/pics/render.png)
+![render example](https://github.com/Daiver/pygeom_tools/tree/master/pics/render.png)
 
 
 See `geom_tools.mesh.Mesh` for more details. For saving stuff see `export_vertices_by_existing_obj`, `export_vertices_by_existing_obj_stream`
