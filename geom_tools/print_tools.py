@@ -3,8 +3,13 @@ from .mesh import Mesh
 
 def summary(model: Mesh) -> str:
     return \
-        f"Model loaded, " \
-        f"n vertices: {model.n_vertices()}, " \
-        f"n vts: {model.n_texture_vertices()}, " \
-        f"n polygons: {model.n_polygons()}, " \
-        f"n triangles: {model.n_triangles()}"
+        "Model info:, " \
+        "n vertices: {0}, " \
+        "n vts: {1}, " \
+        "n polygons: {2}, " \
+        "n triangles: {3}".format(
+            model.n_vertices(),
+            model.n_texture_vertices(),
+            model.n_polygons(),
+            model.n_triangles()
+        )

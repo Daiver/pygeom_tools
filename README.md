@@ -54,7 +54,7 @@ Result render:
 See `geom_tools.mesh.Mesh` for more details. For saving stuff see `export_vertices_by_existing_obj`, `export_vertices_by_existing_obj_stream`
 
 # Requires
- - Python 3.6
+ - Python 3.5 (3.6 + for examples)
  - NumPy
 
 I prefer latest versions of interpreter/libraries but please let me know if you need compatibility with old versions 
