@@ -53,6 +53,12 @@ Result render:
 
 See `geom_tools.mesh.Mesh` for more details. For saving stuff see `export_vertices_by_existing_obj`, `export_vertices_by_existing_obj_stream`
 
+# Requires
+ - Python 3.6
+ - NumPy
+
+I prefer latest versions of interpreter/libraries but please let me know if you need compatibility with old versions 
+
 # Installation
 
 ## Pip
@@ -163,6 +169,7 @@ res = geom_tools.transform_vertices(transformation, vertices)
 ```python
 import geom_tools
 # Untested, returns transform which fit vertices to ortho camera 
+width, height = 300, 200
 geom_tools.fit_to_view_transform(bbox=geom_tools.BoundingBox(), canvas_size=(width, height))
 
 ```

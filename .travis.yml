@@ -5,6 +5,12 @@ notifications:
     on_success: never
     on_failure: never
 
+matrix:
+  include:
+    - python: 3.7
+    - python: 3.6
+    - python: 3.5
+
 install:
 - pip install --upgrade pip pytest
 
