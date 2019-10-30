@@ -21,12 +21,12 @@ def save_to_stream(mesh: Mesh, stream: io.TextIOWrapper, save_normals=False):
 
 def _write_vertices(vertices, stream: io.TextIOWrapper):
     for v in vertices:
-        stream.write(f"v {v[0]} {v[1]} {v[2]}\n")
+        stream.write("v {0} {1} {2}\n".format(v[0], v[1], v[2]))
 
 
 def _write_texture_vertices(texture_vertices, stream: io.TextIOWrapper):
     for v in texture_vertices:
-        stream.write(f"vt {v[0]} {v[1]}\n")
+        stream.write("vt {0} {1}\n".format(v[0], v[1]))
 
 
 def _write_faces(polygon_vertex_indices, texture_polygon_vertex_indices, stream: io.TextIOWrapper):
@@ -36,12 +36,12 @@ def _write_faces(polygon_vertex_indices, texture_polygon_vertex_indices, stream:
     if has_uv:
         assert n_faces == len(texture_polygon_vertex_indices)
         for v_face, t_face in zip(polygon_vertex_indices, texture_polygon_vertex_indices):
-            line = " ".join(f"{v_ind + 1}/{t_ind + 1}" for v_ind, t_ind in zip(v_face, t_face))
-            stream.write(f"f {line}\n")
+            line = " ".join("{0}/{1}".format(v_ind + 1, t_ind + 1) for v_ind, t_ind in zip(v_face, t_face))
+            stream.write("f {0}\n".format(line))
     else:
         for v_face in polygon_vertex_indices:
-            line = " ".join(f"{v_ind + 1}" for v_ind in v_face)
-            stream.write(f"f {line}\n")
+            line = " ".join(str(v_ind + 1) for v_ind in v_face)
+            stream.write("f {0}\n".format(line))
 
 
 def export_vertices_by_existing_obj(vertices: np.ndarray, src_path: str, dst_path: str):
@@ -59,7 +59,7 @@ def export_vertices_by_existing_obj_stream(
     for line in src_stream:
         if line[0:2] == "v ":
             assert v_ind < len(vertices)
-            dst_stream.write(f"v {vertices[v_ind, 0]} {vertices[v_ind, 1]} {vertices[v_ind, 2]}\n")
+            dst_stream.write("v {0} {1} {2}\n".format(vertices[v_ind, 0], vertices[v_ind, 1], vertices[v_ind, 2]))
             v_ind += 1
         else:
             dst_stream.write(line)
