@@ -14,6 +14,20 @@ class TestObjParser(unittest.TestCase):
     def test_is_array_equal03(self):
         self.assertFalse(geom_tools.utils.is_arrays_equal(np.array([1, 1, 2]), np.array([1, 2])))
 
+    def test_is_none_or_ndarray01(self):
+        self.assertTrue(geom_tools.utils.is_none_or_ndarray(None))
+        self.assertFalse(geom_tools.utils.is_none_or_ndarray(1))
+        self.assertFalse(geom_tools.utils.is_none_or_ndarray("31"))
+        self.assertTrue(geom_tools.utils.is_none_or_ndarray(np.zeros(2)))
+        self.assertTrue(geom_tools.utils.is_none_or_ndarray(np.zeros(2, dtype=np.uint8), required_dtype=np.uint8))
+        self.assertFalse(geom_tools.utils.is_none_or_ndarray(np.zeros(2, dtype=np.int32), required_dtype=np.uint8))
+
+    def test_is_array_equal_or_both_none01(self):
+        self.assertTrue(geom_tools.utils.is_arrays_equal_or_both_none(np.array([1, 2]), np.array([1, 2])))
+        self.assertFalse(geom_tools.utils.is_arrays_equal_or_both_none(np.array([1, 2]), None))
+        self.assertFalse(geom_tools.utils.is_arrays_equal_or_both_none(None, np.array([1, 2])))
+        self.assertTrue(geom_tools.utils.is_arrays_equal_or_both_none(None, None))
+
     def test_triangulate01(self):
         faces = [
             [5, 3, 5]
