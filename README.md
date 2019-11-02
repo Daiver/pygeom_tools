@@ -183,9 +183,18 @@ geom_tools.fit_to_view_transform(bbox=geom_tools.BoundingBox(), canvas_size=(wid
 
 ```
 
+## Alignment
+
+```python
+import geom_tools
+# TODO: write readme about rigid alignment
+transformation = geom_tools.rigid_alignment_transformation(src, dst)
+```
+
 ## Utils
 
 ```python
+import geom_tools
 # find center of vertices, works even for non 3d data
 vertices = [
     [0, 0, 3],
