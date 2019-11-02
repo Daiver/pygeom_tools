@@ -39,3 +39,12 @@ def triangulate_polygons(polygon_vertex_indices):
             res.append([polygon[0], polygon[i + 1], polygon[i + 2]])
 
     return res
+
+
+def center_of_vertices(
+        vertices: Union[List[List[float]], np.ndarray]
+) -> np.ndarray:
+    vertices = np.array(vertices)
+    assert vertices.ndim == 2
+    assert vertices.shape[0] > 0
+    return vertices.mean(axis=0)

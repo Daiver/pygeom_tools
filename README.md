@@ -182,3 +182,15 @@ width, height = 300, 200
 geom_tools.fit_to_view_transform(bbox=geom_tools.BoundingBox(), canvas_size=(width, height))
 
 ```
+
+## Utils
+
+```python
+# find center of vertices, works even for non 3d data
+vertices = [
+    [0, 0, 3],
+    [1, 0, 1],
+    [2, -0.3, 2]
+]
+res = geom_tools.center_of_vertices(vertices)  # [1.0, -0.1, 2]
+```

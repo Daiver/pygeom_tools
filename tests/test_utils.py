@@ -4,7 +4,7 @@ import numpy as np
 import geom_tools
 
 
-class TestObjParser(unittest.TestCase):
+class TestUtils(unittest.TestCase):
     def test_is_array_equal01(self):
         self.assertTrue(geom_tools.utils.is_arrays_equal(np.array([1, 2]), np.array([1, 2])))
 
@@ -63,6 +63,43 @@ class TestObjParser(unittest.TestCase):
             [1, 3, 4]
         ]
         self.assertTrue(res == ans)
+
+    def test_center_of_vertices01(self):
+        vertices = [
+            [0, 0, 0]
+        ]
+        ans = [0, 0, 0]
+        res = geom_tools.utils.center_of_vertices(vertices)
+        self.assertTrue(geom_tools.utils.is_arrays_equal(ans, res))
+
+    def test_center_of_vertices02(self):
+        vertices = [
+            [0, 0],
+            [1, 0]
+        ]
+        ans = [0.5, 0]
+        res = geom_tools.utils.center_of_vertices(vertices)
+        self.assertTrue(geom_tools.utils.is_arrays_equal(ans, res))
+
+    def test_center_of_vertices03(self):
+        vertices = [
+            [0, 0],
+            [1, 0],
+            [2, 0.3]
+        ]
+        ans = [1.0, 0.1]
+        res = geom_tools.utils.center_of_vertices(vertices)
+        self.assertTrue(geom_tools.utils.is_arrays_equal(ans, res))
+
+    def test_center_of_vertices04(self):
+        vertices = [
+            [0, 0, 3],
+            [1, 0, 1],
+            [2, -0.3, 2]
+        ]
+        ans = [1.0, -0.1, 2]
+        res = geom_tools.utils.center_of_vertices(vertices)
+        self.assertTrue(geom_tools.utils.is_arrays_equal(ans, res))
 
 
 if __name__ == '__main__':

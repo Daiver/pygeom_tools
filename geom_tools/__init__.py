@@ -16,4 +16,6 @@ from .transformations import (
     fit_to_view_transform
 )
 
+from .utils import center_of_vertices
+
 from .rigid_alignment import rigid_alignment_transformation
