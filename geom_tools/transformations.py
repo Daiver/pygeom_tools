@@ -79,3 +79,12 @@ def fit_to_view_transform(bbox: BoundingBox, canvas_size: (int, int)) -> (np.nda
     trans = -mat @ center + [canvas_size[0] / 2.0, canvas_size[1] / 2.0, 0]
 
     return mat, trans
+
+
+def translated(
+        translation: Union[List[List[float]], np.ndarray],
+        vertices: Union[List[List[float]], np.ndarray]
+) -> np.ndarray:
+    translation = np.array(translation)
+    vertices = np.array(vertices)
+    return vertices[:] + translation

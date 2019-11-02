@@ -137,6 +137,15 @@ res = geom_tools.rotated(
     ]
 )
 
+# Yet another alternative with zero rotation
+res = geom_tools.translated(
+    translation=[1, 2, 3],
+    vertices=[
+        [0, 0, 0],
+        [1, 0, 5],
+    ]
+)
+
 ```
 
 ### Rotation around vertex to convenient transformation
