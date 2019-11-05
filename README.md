@@ -74,6 +74,14 @@ cd pygeom_tools
 python3 setup.py install
 ```
 
+# TODO:
+
+ - Topology related stuff
+   - Adjacency tables for vertices
+   - Adjacency tables for polygons and triangles
+   - Linked components search
+ - Geodesics 
+
 # Features
 ## Bounding box
 
