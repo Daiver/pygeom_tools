@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f4a61572-a6cd-4092-b9ef-675ff77a1a2b" name="Default Changelist" comment="" />
+    <list default="true" id="f4a61572-a6cd-4092-b9ef-675ff77a1a2b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/geom_tools/topology.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/test_topology.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
