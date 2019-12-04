@@ -12,7 +12,7 @@ matrix:
   - python: 3.7
 
 install:
-- pip install --upgrade pip pytest
+- pip install --upgrade pip pytest -r requirements.txt
 
 script:
 - pytest
