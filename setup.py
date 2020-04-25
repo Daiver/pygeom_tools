@@ -1,3 +1,5 @@
+import pybind11
+
 import setuptools
 import os
 
@@ -11,6 +13,33 @@ def load_version():
         exec(f.read(), context)
     return context["__version__"]
 
+
+class GetPybindInclude(object):
+    """Helper class to determine the pybind11 include path
+    The purpose of this class is to postpone importing pybind11
+    until it is actually installed, so that the ``get_include()``
+    method can be invoked. """
+
+    def __init__(self, user=False):
+        self.user = user
+
+    def __str__(self):
+        import pybind11
+        return pybind11.get_include(self.user)
+
+
+ext_modules = [
+    setuptools.Extension(
+        'geom_tools.obj_import_cpp',
+        ['geom_tools/csrc/obj_import_cpp.cpp'],
+        include_dirs=[
+            GetPybindInclude(),
+            GetPybindInclude(user=True)
+        ],
+        language='c++',
+        extra_compile_args=['-std=c++11'],
+    ),
+]
 
 setuptools.setup(
     name="geom_tools",
@@ -26,4 +55,7 @@ setuptools.setup(
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
     ),
+    ext_modules=ext_modules,
+    install_requires=['pybind11>=2.4'],
+    setup_requires=['pybind11>=2.4'],
 )

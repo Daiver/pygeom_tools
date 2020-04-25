@@ -3,10 +3,28 @@ import numpy as np
 from .mesh import Mesh
 from .utils import triangulate_polygons
 
+from . import obj_import_cpp
+
 
 # Just for simplicity
-def load(file_name, triangulate=True):
+def load(file_name, triangulate=True) -> Mesh:
     return from_obj_file(file_name=file_name, triangulate=triangulate)
+
+
+def load_vertices(file_name: str) -> np.ndarray:
+    return from_obj_file_vertices(file_name=file_name)
+
+
+def from_obj_file_vertices(file_name: str) -> np.ndarray:
+    with open(file_name) as f:
+        string = f.read()
+        return from_obj_string_vertices(string)
+
+
+def from_obj_string_vertices(string: str) -> np.ndarray:
+    flat_vertices = obj_import_cpp.read_flat_vertices(string)
+    assert len(flat_vertices) % 3 == 0
+    return np.array(flat_vertices).reshape(-1, 3)
 
 
 # Currently normals are not supported

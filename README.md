@@ -56,6 +56,7 @@ See `geom_tools.mesh.Mesh` for more details. For saving stuff see `export_vertic
 # Requires
  - Python 3.5 (3.6 + for examples)
  - NumPy
+ - Pybind11
 
 I prefer latest versions of interpreter/libraries but please let me know if you need compatibility with old versions 
 
