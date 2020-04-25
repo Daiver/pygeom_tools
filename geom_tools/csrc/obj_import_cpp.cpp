@@ -7,27 +7,20 @@
 #include <iostream>
 
 
-void readVertex3D(const std::string &line, std::string &token, std::vector<float> &vertices)
+const char spaceDelim = ' ';
+
+
+void readVertex3D(
+    const std::string &line,
+    std::istringstream &lineStream,
+    std::string &token,
+    std::vector<float> &vertices)
 {
-    std::istringstream lineStream(line);
-    std::getline(lineStream, token, ' ');
-
-    std::getline(lineStream, token, ' ');
+    std::getline(lineStream, token, spaceDelim);
     vertices.push_back(std::stof(token));
-    std::getline(lineStream, token, ' ');
+    std::getline(lineStream, token, spaceDelim);
     vertices.push_back(std::stof(token));
-    std::getline(lineStream, token, ' ');
-    vertices.push_back(std::stof(token));
-}
-
-void readVertex2D(const std::string &line, std::string &token, std::vector<float> &vertices)
-{
-    std::istringstream lineStream(line);
-    std::getline(lineStream, token, ' ');
-
-    std::getline(lineStream, token, ' ');
-    vertices.push_back(std::stof(token));
-    std::getline(lineStream, token, ' ');
+    std::getline(lineStream, token, spaceDelim);
     vertices.push_back(std::stof(token));
 }
 
@@ -41,10 +34,17 @@ std::vector<float> readFlatVerticesFromString(const std::string &allLines)
     std::string tokenBuffer;
 
     for(std::string line; std::getline(linesStream, line); ){
-        if(line.size() < 2)
+        std::istringstream lineStream(line);
+
+        while(std::getline(lineStream, tokenBuffer, spaceDelim))
+            if(tokenBuffer.size() > 0)
+                break;
+
+        if(tokenBuffer.size() < 1)
             continue;
-        if((line[0] == 'v') && (line[1] == ' '))
-            readVertex3D(line, tokenBuffer, vertices);
+
+        if((tokenBuffer[0] == 'v') && (tokenBuffer.size() == 1))
+            readVertex3D(line, lineStream, tokenBuffer, vertices);
     }
 
     return vertices;

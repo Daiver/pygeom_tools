@@ -1,8 +1,11 @@
 <component name="ProjectDictionaryState">
   <dictionary name="daiver">
     <words>
+      <w>cout</w>
       <w>csrc</w>
       <w>daiver</w>
+      <w>delim</w>
+      <w>endl</w>
       <w>getline</w>
       <w>iostream</w>
       <w>istringstream</w>

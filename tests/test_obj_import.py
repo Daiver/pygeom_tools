@@ -2,6 +2,7 @@ import unittest
 
 import numpy as np
 import geom_tools
+from geom_tools.utils import is_arrays_equal
 
 
 class TestObjParser(unittest.TestCase):
@@ -264,6 +265,24 @@ class TestObjParser(unittest.TestCase):
 
     def test_file_not_found01(self):
         self.assertRaises(FileNotFoundError, geom_tools.load, "123")
+
+    def test_load_vertices01(self):
+        content = """
+        v 1 0 0
+        v 0 1 0
+        v 0 0 1
+
+        f 1 2 3
+
+        """
+        vertices = geom_tools.obj_import.from_obj_string_vertices(content)
+
+        ans_vertices = np.array([
+            [1, 0, 0],
+            [0, 1, 0],
+            [0, 0, 1]
+        ])
+        self.assertTrue(is_arrays_equal(ans_vertices, vertices))
 
 
 if __name__ == '__main__':
