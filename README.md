@@ -11,7 +11,9 @@ It's pretty dirty and slow. No obj file validation. Also it supports only vertic
 ```python
 import geom_tools
 path_to_obj = "models/teapot.obj"
-model = geom_tools.from_obj_file(path_to_obj)
+model = geom_tools.load(path_to_obj)
+# Or, if you want to load only vertices:
+# vertices = geom_tools.load_vertices(path_to_obj)  # Super fast due to C++ extension
 # Print various statistics 
 print(f"Model loaded, "
       f"n vertices: {model.n_vertices()}, "
