@@ -10,17 +10,27 @@
 const char spaceDelim = ' ';
 
 
-void readVertex3D(
+inline void iterateStreamUntilNonEmpty(
+    std::istringstream &lineStream,
+    std::string &tokenBuffer)
+{
+    while(std::getline(lineStream, tokenBuffer, spaceDelim))
+        if(tokenBuffer.size() > 0)
+            break;
+}
+
+
+inline void readVertex3D(
     const std::string &line,
     std::istringstream &lineStream,
     std::string &token,
     std::vector<float> &vertices)
 {
-    std::getline(lineStream, token, spaceDelim);
+    iterateStreamUntilNonEmpty(lineStream, token);
     vertices.push_back(std::stof(token));
-    std::getline(lineStream, token, spaceDelim);
+    iterateStreamUntilNonEmpty(lineStream, token);
     vertices.push_back(std::stof(token));
-    std::getline(lineStream, token, spaceDelim);
+    iterateStreamUntilNonEmpty(lineStream, token);
     vertices.push_back(std::stof(token));
 }
 
@@ -36,9 +46,7 @@ std::vector<float> readFlatVerticesFromString(const std::string &allLines)
     for(std::string line; std::getline(linesStream, line); ){
         std::istringstream lineStream(line);
 
-        while(std::getline(lineStream, tokenBuffer, spaceDelim))
-            if(tokenBuffer.size() > 0)
-                break;
+        iterateStreamUntilNonEmpty(lineStream, tokenBuffer);
 
         if(tokenBuffer.size() < 1)
             continue;
