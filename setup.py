@@ -1,5 +1,3 @@
-import pybind11
-
 import setuptools
 import os
 
