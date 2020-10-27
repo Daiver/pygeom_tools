@@ -1,5 +1,7 @@
+wheel
 numpy >= 1.14
 pybind11
 
+pytest
 opencv-python
 scipy >= 1.1.0
