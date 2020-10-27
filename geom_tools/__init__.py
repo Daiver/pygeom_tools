@@ -15,6 +15,7 @@ from .transformations import (
     rotation_around_vertex,
     fit_to_view_transform
 )
+from .adjacency_tools import vertices_adjacency_from_polygon_vertex_indices
 
 from .utils import center_of_vertices
 
