@@ -87,5 +87,18 @@ class Mesh:
 
         return True
 
+    def summary(self) -> str:
+        return \
+            "Geom info: " \
+            "n vertices: {0}, " \
+            "n vts: {1}, " \
+            "n polygons: {2}, " \
+            "n triangles: {3}".format(
+                self.n_vertices(),
+                self.n_texture_vertices(),
+                self.n_polygons(),
+                self.n_triangles()
+            )
+
     def bbox(self) -> BoundingBox:
         return from_vertices(self.vertices)

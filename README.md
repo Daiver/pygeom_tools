@@ -21,7 +21,7 @@ print(f"Model loaded, "
       f"n polygons: {model.n_polygons()}, "
       f"n triangles: {model.n_triangles()}")
 # or simply
-print(geom_tools.summary(model))
+print(model.summary())
 print(model.vertices[:5])  # NumPy array, same for texture vertices, etc
 print(model.polygon_vertex_indices[:5])  # List of lists, same for texture topology, triangulated topology, etc
 print(model.triangle_vertex_indices[:5])  # Fan like triangulation of topology. Keep original triangles
@@ -79,8 +79,7 @@ python3 setup.py install
 
 # TODO:
 
- - Topology related stuff
-   - Adjacency tables for vertices
+ - Topology related stuff   
    - Adjacency tables for polygons and triangles
    - Linked components search
  - Geodesics 
@@ -200,6 +199,12 @@ geom_tools.fit_to_view_transform(bbox=geom_tools.BoundingBox(), canvas_size=(wid
 import geom_tools
 # TODO: write readme about rigid alignment
 transformation = geom_tools.rigid_alignment_transformation(src, dst)
+```
+
+## Adjacent vertices search
+```python
+import geom_tools
+adj_table = geom_tools.vertices_adjacency_from_polygon_vertex_indices(geom.polygon_vertex_indices)
 ```
 
 ## Utils

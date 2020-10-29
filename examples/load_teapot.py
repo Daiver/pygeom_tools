@@ -14,7 +14,7 @@ def main():
           f"n polygons: {model.n_polygons()}, "
           f"n triangles: {model.n_triangles()}")
     # or simply
-    print(geom_tools.summary(model))
+    print(model.summary())
     print(model.vertices[:5])  # NumPy array, same for texture vertices, etc
     print(model.polygon_vertex_indices[:5])  # List of lists, same for texture topology, triangulated topology, etc
     print(model.triangle_vertex_indices[:5])  # Fan like triangulation of topology. Keep original triangles
