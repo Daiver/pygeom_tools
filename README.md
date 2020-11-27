@@ -67,7 +67,7 @@ I prefer latest versions of interpreter/libraries but please let me know if you 
 ## Pip
 
 ```
-pip3 install git+https://github.com/Daiver/pygeom_tools
+pip3 install git+https://github.com/Daiver/pygeom_tools#egg=geom_tools
 ```
 
 ## Manual
