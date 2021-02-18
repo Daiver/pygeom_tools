@@ -1,6 +1,5 @@
 import unittest
 
-import geom_tools
 from geom_tools.adjacency_tools import (
     vertices_adjacency_from_polygon_vertex_indices,
     max_vertex_ind_in_list

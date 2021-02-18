@@ -1,4 +1,5 @@
 from .version import __version__
+import numpy as np
 
 from . import utils
 from . import normals_tools
