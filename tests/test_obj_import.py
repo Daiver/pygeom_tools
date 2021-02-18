@@ -327,12 +327,11 @@ class TestObjParser(unittest.TestCase):
         res = geom_tools.from_obj_string(content, compute_normals=True)
         ans = geom_tools.Mesh(
             vertices=np.array([
+                [0, 0, 0],
                 [1, 0, 0],
                 [0, 1, 0],
-                [0, 0, 1],
-                [16, 3, 2],
             ]),
-            polygon_vertex_indices=[[0, 1, 2, 3]],
+            polygon_vertex_indices=[[0, 1, 2]],
             triangle_vertex_indices=np.array([[0, 1, 2]]),
             normals=np.array([[0, 0, 1], [0, 0, 1], [0, 0, 1]], dtype=np.float32),
         )
