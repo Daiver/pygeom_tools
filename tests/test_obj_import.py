@@ -15,7 +15,7 @@ class TestObjParser(unittest.TestCase):
         f 1 2 3
         
         """
-        res = geom_tools.from_obj_string(content)
+        res = geom_tools.from_obj_string(content, compute_normals=False)
         ans = geom_tools.Mesh(
             vertices=np.array([
                 [1, 0, 0],
@@ -37,7 +37,7 @@ class TestObjParser(unittest.TestCase):
         f 1 2 3 4
 
         """
-        res = geom_tools.from_obj_string(content)
+        res = geom_tools.from_obj_string(content, compute_normals=False)
         ans = geom_tools.Mesh(
             vertices=np.array([
                 [1, 0, 0],
@@ -62,7 +62,7 @@ class TestObjParser(unittest.TestCase):
         f 1//1 2//1 3//1 4//1
 
         """
-        res = geom_tools.from_obj_string(content)
+        res = geom_tools.from_obj_string(content, compute_normals=False)
         ans = geom_tools.Mesh(
             vertices=np.array([
                 [1, 0, 0],
@@ -89,7 +89,7 @@ class TestObjParser(unittest.TestCase):
         f 1/1 2/2 3/3 4/1
 
         """
-        res = geom_tools.from_obj_string(content)
+        res = geom_tools.from_obj_string(content, compute_normals=False)
         ans = geom_tools.Mesh(
             vertices=np.array([
                 [1, 0, 0],
@@ -129,7 +129,7 @@ class TestObjParser(unittest.TestCase):
         f 2/1 3/2 4/3
 
         """
-        res = geom_tools.from_obj_string(content)
+        res = geom_tools.from_obj_string(content, compute_normals=False)
         ans = geom_tools.Mesh(
             vertices=np.array([
                 [1, 0, 0],
@@ -179,7 +179,7 @@ class TestObjParser(unittest.TestCase):
         f 2/1 3/2 4/3
 
         """
-        res = geom_tools.from_obj_string(content)
+        res = geom_tools.from_obj_string(content, compute_normals=False)
         ans = geom_tools.Mesh(
             vertices=np.array([
                 [1, 0, 0],
@@ -229,7 +229,7 @@ class TestObjParser(unittest.TestCase):
         f 2/1 3/2 4/3
 
         """
-        res = geom_tools.from_obj_string(content)
+        res = geom_tools.from_obj_string(content, compute_normals=False)
         ans = geom_tools.Mesh(
             vertices=np.array([
                 [1, 0, 0],
@@ -279,7 +279,7 @@ class TestObjParser(unittest.TestCase):
         f 2/1 3/2 4/3
 
         """
-        res = geom_tools.from_obj_string(content)
+        res = geom_tools.from_obj_string(content, compute_normals=False)
         ans = geom_tools.Mesh(
             vertices=np.array([
                 [1, 0, 0],
@@ -310,6 +310,31 @@ class TestObjParser(unittest.TestCase):
                 [0, 2, 0],
                 [0, 1, 2],
             ],
+        )
+        self.assertTrue(res == ans)
+
+    def test_from_obj_string09(self):
+        content = """
+        v 0 0 0
+        v 1 0 0
+        v 0 1 0        
+
+        vn 1 0 0
+
+        f 1//1 2//1 3//1 
+
+        """
+        res = geom_tools.from_obj_string(content, compute_normals=True)
+        ans = geom_tools.Mesh(
+            vertices=np.array([
+                [1, 0, 0],
+                [0, 1, 0],
+                [0, 0, 1],
+                [16, 3, 2],
+            ]),
+            polygon_vertex_indices=[[0, 1, 2, 3]],
+            triangle_vertex_indices=np.array([[0, 1, 2]]),
+            normals=np.array([[0, 0, 1], [0, 0, 1], [0, 0, 1]], dtype=np.float32),
         )
         self.assertTrue(res == ans)
 

@@ -1,4 +1,4 @@
-from typing import Union, List
+from typing import Union, Optional
 import numpy as np
 
 from .utils import is_arrays_equal, is_arrays_equal_or_both_none
@@ -13,9 +13,9 @@ class Mesh:
         polygon_vertex_indices: list,
         texture_vertices: np.ndarray = None,
         texture_polygon_vertex_indices: list = None,
-        normals: np.ndarray = None,
-        triangle_vertex_indices: Union[np.ndarray, List[List[int]]] = None,
-        triangle_texture_vertex_indices: Union[np.ndarray, List[List[int]]] = None
+        normals: Optional[np.ndarray] = None,
+        triangle_vertex_indices: Optional[np.ndarray] = None,
+        triangle_texture_vertex_indices: Optional[np.ndarray] = None
     ):
         self.vertices = vertices
         self.polygon_vertex_indices = polygon_vertex_indices

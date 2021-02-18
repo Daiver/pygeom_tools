@@ -2,13 +2,14 @@ import os
 import numpy as np
 from .mesh import Mesh
 from .utils import triangulate_polygons
+from .normals_tools import compute_vertices_normals_from_triangles
 
 from . import obj_import_cpp
 
 
 # Just for simplicity
-def load(file_name, triangulate=True) -> Mesh:
-    return from_obj_file(file_name=file_name, triangulate=triangulate)
+def load(file_name, triangulate=True, compute_normals=True) -> Mesh:
+    return from_obj_file(file_name=file_name, triangulate=triangulate, compute_normals=compute_normals)
 
 
 def load_vertices(file_name: str) -> np.ndarray:
@@ -29,14 +30,14 @@ def from_obj_string_vertices(string: str) -> np.ndarray:
 
 # Currently normals are not supported
 # TODO: not effective, use file streams or something like this
-def from_obj_file(file_name, triangulate=True):
+def from_obj_file(file_name, triangulate=True, compute_normals=True):
     with open(file_name) as f:
         string = f.read()
-        return from_obj_string(string, triangulate=triangulate)
+        return from_obj_string(string, triangulate=triangulate, compute_normals=compute_normals)
 
 
 # TODO: just ugly, split it to several functions, add assertions, etc
-def from_obj_string(string, triangulate=True):
+def from_obj_string(string, triangulate=True, compute_normals=True):
     lines = string.split("\n")
     vertices = []
     texture_vertices = []
@@ -82,9 +83,12 @@ def from_obj_string(string, triangulate=True):
     triangle_texture_vertex_indices = None
 
     if triangulate:
-        triangle_vertex_indices = triangulate_polygons(polygon_vertex_indices)
-    if triangulate and texture_vertices is not None:
-        triangle_texture_vertex_indices = triangulate_polygons(texture_polygon_vertex_indices)
+        triangle_vertex_indices = np.array(triangulate_polygons(polygon_vertex_indices), dtype=np.int32)
+        if texture_vertices is not None:
+            triangle_texture_vertex_indices = \
+                np.array(triangulate_polygons(texture_polygon_vertex_indices), dtype=np.int32)
+        if compute_normals:
+            normals = compute_vertices_normals_from_triangles(vertices, triangle_vertex_indices)
 
     return Mesh(
         vertices=vertices,
