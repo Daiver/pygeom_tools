@@ -1,5 +1,4 @@
 from typing import List, Optional
-import numpy as np
 
 
 # TODO: separate (crs?) structure for table storage

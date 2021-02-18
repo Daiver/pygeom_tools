@@ -38,19 +38,19 @@ class TestMesh(unittest.TestCase):
     def test_mesh_comparison03(self):
         mesh1 = Mesh(
             vertices=np.arange(3), polygon_vertex_indices=[[0, 1, 2, 4]],
-            triangle_vertex_indices=[[0, 1, 2], [0, 2, 4]])
+            triangle_vertex_indices=np.array([[0, 1, 2], [0, 2, 4]]))
         mesh2 = Mesh(
             vertices=np.arange(3), polygon_vertex_indices=[[0, 1, 2, 4]],
-            triangle_vertex_indices=[[0, 1, 2], [0, 2, 4]])
+            triangle_vertex_indices=np.array([[0, 1, 2], [0, 2, 4]]))
         self.assertTrue(mesh1 == mesh2)
 
     def test_mesh_comparison04(self):
         mesh1 = Mesh(
             vertices=np.arange(3), polygon_vertex_indices=[[0, 1, 2, 4]],
-            triangle_vertex_indices=[[0, 1, 2], [0, 2, 4]])
+            triangle_vertex_indices=np.array([[0, 1, 2], [0, 2, 4]]))
         mesh2 = Mesh(
             vertices=np.arange(3), polygon_vertex_indices=[[0, 1, 2, 4]],
-            triangle_vertex_indices=[[0, 1, 2], [0, 6, 4]])
+            triangle_vertex_indices=np.array([[0, 1, 2], [0, 6, 4]]))
         self.assertTrue(mesh1 != mesh2)
 
     def test_mesh_n_vertices01(self):
@@ -84,11 +84,11 @@ class TestMesh(unittest.TestCase):
                 [0, 1, 2],
                 [4, 5, 6, 8],
             ],
-            triangle_vertex_indices=[
+            triangle_vertex_indices=np.array([
                 [0, 1, 2],
                 [4, 5, 6],
                 [4, 6, 8],
-            ])
+            ]))
         self.assertEqual(mesh1.n_triangles(), 3)
 
     def test_mesh_bbox01(self):

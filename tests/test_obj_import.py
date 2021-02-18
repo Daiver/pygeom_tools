@@ -23,7 +23,7 @@ class TestObjParser(unittest.TestCase):
                 [0, 0, 1]
             ]),
             polygon_vertex_indices=[[0, 1, 2]],
-            triangle_vertex_indices=[[0, 1, 2]]
+            triangle_vertex_indices=np.array([[0, 1, 2]])
         )
         self.assertTrue(res == ans)
 
@@ -46,7 +46,7 @@ class TestObjParser(unittest.TestCase):
                 [16, 3, 2],
             ]),
             polygon_vertex_indices=[[0, 1, 2, 3]],
-            triangle_vertex_indices=[[0, 1, 2], [0, 2, 3]]
+            triangle_vertex_indices=np.array([[0, 1, 2], [0, 2, 3]])
         )
         self.assertTrue(res == ans)
 
@@ -71,7 +71,7 @@ class TestObjParser(unittest.TestCase):
                 [16, 3, 2],
             ]),
             polygon_vertex_indices=[[0, 1, 2, 3]],
-            triangle_vertex_indices=[[0, 1, 2], [0, 2, 3]]
+            triangle_vertex_indices=np.array([[0, 1, 2], [0, 2, 3]])
         )
         self.assertTrue(res == ans)
 
@@ -106,11 +106,11 @@ class TestObjParser(unittest.TestCase):
             texture_polygon_vertex_indices=[
                 [0, 1, 2, 0]
             ],
-            triangle_vertex_indices=[[0, 1, 2], [0, 2, 3]],
-            triangle_texture_vertex_indices=[
+            triangle_vertex_indices=np.array([[0, 1, 2], [0, 2, 3]]),
+            triangle_texture_vertex_indices=np.array([
                 [0, 1, 2],
                 [0, 2, 0]
-            ],
+            ]),
         )
         self.assertTrue(res == ans)
 
@@ -150,16 +150,16 @@ class TestObjParser(unittest.TestCase):
                 [0, 1, 2, 0],
                 [0, 1, 2],
             ],
-            triangle_vertex_indices=[
+            triangle_vertex_indices=np.array([
                 [0, 1, 2],
                 [0, 2, 3],
                 [1, 2, 3],
-            ],
-            triangle_texture_vertex_indices=[
+            ]),
+            triangle_texture_vertex_indices=np.array([
                 [0, 1, 2],
                 [0, 2, 0],
                 [0, 1, 2],
-            ],
+            ]),
         )
         self.assertTrue(res == ans)
 
@@ -200,16 +200,16 @@ class TestObjParser(unittest.TestCase):
                 [0, 1, 2, 0],
                 [0, 1, 2],
             ],
-            triangle_vertex_indices=[
+            triangle_vertex_indices=np.array([
                 [0, 1, 2],
                 [0, 2, 3],
                 [1, 2, 3],
-            ],
-            triangle_texture_vertex_indices=[
+            ]),
+            triangle_texture_vertex_indices=np.array([
                 [0, 1, 2],
                 [0, 2, 0],
                 [0, 1, 2],
-            ],
+            ]),
         )
         self.assertTrue(res == ans)
 
@@ -250,16 +250,16 @@ class TestObjParser(unittest.TestCase):
                 [0, 1, 2, 0],
                 [0, 1, 2],
             ],
-            triangle_vertex_indices=[
+            triangle_vertex_indices=np.array([
                 [0, 1, 2],
                 [0, 2, 3],
                 [1, 2, 3],
-            ],
-            triangle_texture_vertex_indices=[
+            ]),
+            triangle_texture_vertex_indices=np.array([
                 [0, 1, 2],
                 [0, 2, 0],
                 [0, 1, 2],
-            ],
+            ]),
         )
         self.assertTrue(res == ans)
 
@@ -300,16 +300,16 @@ class TestObjParser(unittest.TestCase):
                 [0, 1, 2, 0],
                 [0, 1, 2],
             ],
-            triangle_vertex_indices=[
+            triangle_vertex_indices=np.array([
                 [0, 1, 2],
                 [0, 2, 3],
                 [1, 2, 3],
-            ],
-            triangle_texture_vertex_indices=[
+            ]),
+            triangle_texture_vertex_indices=np.array([
                 [0, 1, 2],
                 [0, 2, 0],
                 [0, 1, 2],
-            ],
+            ]),
         )
         self.assertTrue(res == ans)
 
