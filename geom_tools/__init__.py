@@ -1,6 +1,8 @@
 from .version import __version__
 
 from . import utils
+from . import normals_tools
+
 from .mesh import Mesh
 
 from .obj_import import load, load_vertices, from_obj_string, from_obj_file
