@@ -15,7 +15,9 @@ class Mesh:
             texture_polygon_vertex_indices: Optional[List[int]] = None,
             normals: Optional[np.ndarray] = None,
             triangle_vertex_indices: Optional[np.ndarray] = None,
-            triangle_texture_vertex_indices: Optional[np.ndarray] = None
+            triangle_texture_vertex_indices: Optional[np.ndarray] = None,
+            polygon_groups: Optional[List[int]] = None,
+            group_names: Optional[List[str]] = None
     ):
         self.vertices = vertices
         self.polygon_vertex_indices = polygon_vertex_indices
@@ -32,6 +34,12 @@ class Mesh:
         self.triangle_vertex_indices = triangle_vertex_indices
         self.triangle_texture_vertex_indices = triangle_texture_vertex_indices
 
+        if polygon_groups is None:
+            polygon_groups = [-1] * len(polygon_vertex_indices)
+        assert len(polygon_vertex_indices) == len(polygon_groups)
+        self.polygon_groups = polygon_groups
+        self.group_names = group_names
+
     def n_vertices(self) -> int:
         return len(self.vertices)
 
@@ -44,10 +52,7 @@ class Mesh:
         return len(self.polygon_vertex_indices)
 
     def n_triangles(self) -> Optional[int]:
-        if self.has_triangulated():
-            return len(self.triangle_vertex_indices)
-        else:
-            return None
+        return len(self.triangle_vertex_indices) if self.is_triangulated() else None
 
     def has_uv(self) -> bool:
         return self.texture_vertices is not None
@@ -55,8 +60,11 @@ class Mesh:
     def has_normals(self) -> bool:
         return self.normals is not None
 
-    def has_triangulated(self) -> bool:
+    def is_triangulated(self) -> bool:
         return self.triangle_vertex_indices is not None
+
+    def n_groups(self) -> int:
+        return len(self.group_names) if self.group_names is not None else 0
 
     def __eq__(self, other) -> bool:
         assert isinstance(other, Mesh)
@@ -82,7 +90,13 @@ class Mesh:
 
         if not is_arrays_equal_or_both_none(self.triangle_vertex_indices, other.triangle_vertex_indices):
             return False
-        if not is_arrays_equal_or_both_none(self.triangle_texture_vertex_indices, other.triangle_texture_vertex_indices):
+        if not is_arrays_equal_or_both_none(
+                self.triangle_texture_vertex_indices, other.triangle_texture_vertex_indices
+        ):
+            return False
+
+        is_groups_equals = self.polygon_groups == other.polygon_groups and self.group_names == other.group_names
+        if not is_groups_equals:
             return False
 
         return True
@@ -93,11 +107,13 @@ class Mesh:
             "n vertices: {0}, " \
             "n vts: {1}, " \
             "n polygons: {2}, " \
-            "n triangles: {3}".format(
+            "n triangles: {3}, " \
+            "n groups {4}".format(
                 self.n_vertices(),
                 self.n_texture_vertices(),
                 self.n_polygons(),
-                self.n_triangles()
+                self.n_triangles(),
+                self.n_groups()
             )
 
     def bbox(self) -> BoundingBox:

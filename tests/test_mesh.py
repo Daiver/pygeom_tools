@@ -53,6 +53,83 @@ class TestMesh(unittest.TestCase):
             triangle_vertex_indices=np.array([[0, 1, 2], [0, 6, 4]]))
         self.assertTrue(mesh1 != mesh2)
 
+    def test_mesh_comparison05(self):
+        mesh1 = Mesh(
+            vertices=np.arange(3), polygon_vertex_indices=[[0, 1, 2, 4]],
+            triangle_vertex_indices=np.array([[0, 1, 2], [0, 2, 4]]),
+            polygon_groups=[-1],
+        )
+        mesh2 = Mesh(
+            vertices=np.arange(3), polygon_vertex_indices=[[0, 1, 2, 4]],
+            triangle_vertex_indices=np.array([[0, 1, 2], [0, 2, 4]]),
+        )
+        self.assertTrue(mesh1 == mesh2)
+        self.assertTrue(mesh2 == mesh1)
+
+    def test_mesh_comparison06(self):
+        mesh1 = Mesh(
+            vertices=np.arange(3), polygon_vertex_indices=[[0, 1, 2, 4]],
+            triangle_vertex_indices=np.array([[0, 1, 2], [0, 2, 4]]),
+            polygon_groups=[-1],
+        )
+        mesh2 = Mesh(
+            vertices=np.arange(3), polygon_vertex_indices=[[0, 1, 2, 4]],
+            triangle_vertex_indices=np.array([[0, 1, 2], [0, 2, 4]]),
+            polygon_groups=[-1],
+        )
+        self.assertTrue(mesh1 == mesh2)
+        self.assertTrue(mesh2 == mesh1)
+
+    def test_mesh_comparison07(self):
+        mesh1 = Mesh(
+            vertices=np.arange(3), polygon_vertex_indices=[[0, 1, 2, 4]],
+            triangle_vertex_indices=np.array([[0, 1, 2], [0, 2, 4]]),
+            polygon_groups=[0],
+        )
+        mesh2 = Mesh(
+            vertices=np.arange(3), polygon_vertex_indices=[[0, 1, 2, 4]],
+            triangle_vertex_indices=np.array([[0, 1, 2], [0, 2, 4]]),
+            polygon_groups=[-1],
+        )
+        self.assertTrue(mesh1 != mesh2)
+        self.assertTrue(mesh2 != mesh1)
+
+    def test_mesh_comparison08(self):
+        mesh1 = Mesh(
+            vertices=np.arange(3), polygon_vertex_indices=[[0, 1, 2, 4], [0, 1, 2, 4]],
+            polygon_groups=[1, 0],
+        )
+        mesh2 = Mesh(
+            vertices=np.arange(3), polygon_vertex_indices=[[0, 1, 2, 4], [0, 1, 2, 4]],
+            polygon_groups=[1, 0],
+        )
+        self.assertTrue(mesh1 == mesh2)
+        self.assertTrue(mesh2 == mesh1)
+
+    def test_mesh_comparison09(self):
+        mesh1 = Mesh(
+            vertices=np.arange(3), polygon_vertex_indices=[[0, 1, 2, 4], [0, 1, 2, 4]],
+            polygon_groups=[1, 0], group_names=["R", "Left"]
+        )
+        mesh2 = Mesh(
+            vertices=np.arange(3), polygon_vertex_indices=[[0, 1, 2, 4], [0, 1, 2, 4]],
+            polygon_groups=[1, 0], group_names=["R", "Left"]
+        )
+        self.assertTrue(mesh1 == mesh2)
+        self.assertTrue(mesh2 == mesh1)
+
+    def test_mesh_comparison10(self):
+        mesh1 = Mesh(
+            vertices=np.arange(3), polygon_vertex_indices=[[0, 1, 2, 4], [0, 1, 2, 4]],
+            polygon_groups=[1, 0], group_names=["R", "Left"]
+        )
+        mesh2 = Mesh(
+            vertices=np.arange(3), polygon_vertex_indices=[[0, 1, 2, 4], [0, 1, 2, 4]],
+            polygon_groups=[1, 0], group_names=["Left"]
+        )
+        self.assertTrue(mesh1 != mesh2)
+        self.assertTrue(mesh2 != mesh1)
+
     def test_mesh_n_vertices01(self):
         mesh1 = Mesh(vertices=np.arange(5), polygon_vertex_indices=[[0, 1, 2]])
         self.assertEqual(mesh1.n_vertices(), 5)
@@ -90,6 +167,16 @@ class TestMesh(unittest.TestCase):
                 [4, 6, 8],
             ]))
         self.assertEqual(mesh1.n_triangles(), 3)
+        self.assertTrue(mesh1.is_triangulated())
+
+    def test_mesh_n_triangles02(self):
+        mesh1 = Mesh(
+            vertices=np.arange(5), polygon_vertex_indices=[
+                [0, 1, 2],
+                [4, 5, 6, 8],
+            ])
+        self.assertIsNone(mesh1.n_triangles())
+        self.assertFalse(mesh1.is_triangulated())
 
     def test_mesh_bbox01(self):
         mesh1 = Mesh(
