@@ -8,14 +8,14 @@ from .bounding_box import from_vertices, BoundingBox
 # TODO: asserts for consistent texture information
 class Mesh:
     def __init__(
-        self,
-        vertices: np.ndarray,
-        polygon_vertex_indices: List[int],
-        texture_vertices: Optional[np.ndarray] = None,
-        texture_polygon_vertex_indices: Optional[List[int]] = None,
-        normals: Optional[np.ndarray] = None,
-        triangle_vertex_indices: Optional[np.ndarray] = None,
-        triangle_texture_vertex_indices: Optional[np.ndarray] = None
+            self,
+            vertices: np.ndarray,
+            polygon_vertex_indices: List[List[int]],
+            texture_vertices: Optional[np.ndarray] = None,
+            texture_polygon_vertex_indices: Optional[List[int]] = None,
+            normals: Optional[np.ndarray] = None,
+            triangle_vertex_indices: Optional[np.ndarray] = None,
+            triangle_texture_vertex_indices: Optional[np.ndarray] = None
     ):
         self.vertices = vertices
         self.polygon_vertex_indices = polygon_vertex_indices
