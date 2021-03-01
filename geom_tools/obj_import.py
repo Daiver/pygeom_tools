@@ -1,4 +1,4 @@
-import os
+from collections import OrderedDict
 import numpy as np
 from .mesh import Mesh
 from .utils import triangulate_polygons
@@ -44,6 +44,10 @@ def from_obj_string(string, triangulate=True, compute_normals=True):
     polygon_vertex_indices = []
     texture_polygon_vertex_indices = []
 
+    group_names = OrderedDict()
+    polygon_groups = []
+    last_group_ind = -1
+
     for line in lines:
         line = line.strip()
         if len(line) == 0:
@@ -70,6 +74,12 @@ def from_obj_string(string, triangulate=True, compute_normals=True):
             polygon_vertex_indices.append(vertex_face)
             if len(texture_face) > 0:
                 texture_polygon_vertex_indices.append(texture_face)
+            polygon_groups.append(last_group_ind)
+        elif tokens[0] == "g":
+            group_name = tokens[1]
+            if group_name not in group_names:
+                group_names[group_name] = len(group_names)
+            last_group_ind = group_names[group_name]
 
     vertices = np.array(vertices, dtype=np.float32)
     if len(texture_vertices) > 0:
@@ -90,6 +100,8 @@ def from_obj_string(string, triangulate=True, compute_normals=True):
         if compute_normals:
             normals = compute_vertices_normals_from_triangles(vertices, triangle_vertex_indices)
 
+    group_names = list(group_names.keys()) if len(group_names) != 0 else None
+
     return Mesh(
         vertices=vertices,
         polygon_vertex_indices=polygon_vertex_indices,
@@ -97,4 +109,7 @@ def from_obj_string(string, triangulate=True, compute_normals=True):
         texture_polygon_vertex_indices=texture_polygon_vertex_indices,
         normals=normals,
         triangle_vertex_indices=triangle_vertex_indices,
-        triangle_texture_vertex_indices=triangle_texture_vertex_indices)
+        triangle_texture_vertex_indices=triangle_texture_vertex_indices,
+        polygon_groups=polygon_groups,
+        group_names=group_names,
+    )

@@ -12,7 +12,7 @@ class Mesh:
             vertices: np.ndarray,
             polygon_vertex_indices: List[List[int]],
             texture_vertices: Optional[np.ndarray] = None,
-            texture_polygon_vertex_indices: Optional[List[int]] = None,
+            texture_polygon_vertex_indices: Optional[List[List[int]]] = None,
             normals: Optional[np.ndarray] = None,
             triangle_vertex_indices: Optional[np.ndarray] = None,
             triangle_texture_vertex_indices: Optional[np.ndarray] = None,

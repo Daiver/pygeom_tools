@@ -174,8 +174,7 @@ class TestObjParser(unittest.TestCase):
         vt 0.5 0.5
         vt 0 0.5
 
-        f 1/1 2/2 3/3 4/1
-        g something useful
+        f 1/1 2/2 3/3 4/1        
         f 2/1 3/2 4/3
 
         """
@@ -225,7 +224,7 @@ class TestObjParser(unittest.TestCase):
         vt 0 0.5 0
 
         f 1/1 2/2 3/3 4/1
-        g something useful
+        # something useful
         f 2/1 3/2 4/3
 
         """
@@ -275,7 +274,7 @@ class TestObjParser(unittest.TestCase):
         vt 0 0.5 0
 
         f 1/1 2/2 3/3 4/1
-        g something useful
+        # something useful
         f 2/1 3/2 4/3
 
         """
@@ -334,6 +333,162 @@ class TestObjParser(unittest.TestCase):
             polygon_vertex_indices=[[0, 1, 2]],
             triangle_vertex_indices=np.array([[0, 1, 2]]),
             normals=np.array([[0, 0, 1], [0, 0, 1], [0, 0, 1]], dtype=np.float32),
+        )
+        self.assertTrue(res == ans)
+
+    def test_from_obj_string10(self):
+        content = """
+        v 0 0 0
+        v 1 0 0
+        v 0 1 0                
+
+        g Face
+        f 1 2 3 
+
+        """
+        res = geom_tools.from_obj_string(content, compute_normals=True)
+        ans = geom_tools.Mesh(
+            vertices=np.array([
+                [0, 0, 0],
+                [1, 0, 0],
+                [0, 1, 0],
+            ]),
+            polygon_vertex_indices=[[0, 1, 2]],
+            triangle_vertex_indices=np.array([[0, 1, 2]]),
+            normals=np.array([[0, 0, 1], [0, 0, 1], [0, 0, 1]], dtype=np.float32),
+            polygon_groups=[0],
+            group_names=["Face"]
+        )
+        self.assertTrue(res == ans)
+
+    def test_from_obj_string11(self):
+        content = """
+        v 0 0 0
+        v 1 0 0
+        v 0 1 0                
+
+        g Face
+        f 1 2 3
+        f 1 2 3  
+
+        """
+        res = geom_tools.from_obj_string(content, compute_normals=False, triangulate=False)
+        ans = geom_tools.Mesh(
+            vertices=np.array([
+                [0, 0, 0],
+                [1, 0, 0],
+                [0, 1, 0],
+            ]),
+            polygon_vertex_indices=[[0, 1, 2], [0, 1, 2]],
+            polygon_groups=[0, 0],
+            group_names=["Face"]
+        )
+        self.assertTrue(res == ans)
+
+    def test_from_obj_string12(self):
+        content = """
+        v 0 0 0
+        v 1 0 0
+        v 0 1 0                
+
+        g Face
+        f 1 2 3
+        g Face
+        f 1 2 3  
+
+        """
+        res = geom_tools.from_obj_string(content, compute_normals=False, triangulate=False)
+        ans = geom_tools.Mesh(
+            vertices=np.array([
+                [0, 0, 0],
+                [1, 0, 0],
+                [0, 1, 0],
+            ]),
+            polygon_vertex_indices=[[0, 1, 2], [0, 1, 2]],
+            polygon_groups=[0, 0],
+            group_names=["Face"]
+        )
+        self.assertTrue(res == ans)
+
+    def test_from_obj_string13(self):
+        content = """
+        v 0 0 0
+        v 1 0 0
+        v 0 1 0                
+
+        g Face
+        f 1 2 3
+        g Hand
+        f 1 2 3  
+        g Face
+        f 1 2 3
+
+        """
+        res = geom_tools.from_obj_string(content, compute_normals=False, triangulate=False)
+        ans = geom_tools.Mesh(
+            vertices=np.array([
+                [0, 0, 0],
+                [1, 0, 0],
+                [0, 1, 0],
+            ]),
+            polygon_vertex_indices=[[0, 1, 2], [0, 1, 2], [0, 1, 2]],
+            polygon_groups=[0, 1, 0],
+            group_names=["Face", "Hand"]
+        )
+        self.assertTrue(res == ans)
+
+    def test_from_obj_string14(self):
+        content = """
+        v 0 0 0
+        v 1 0 0
+        v 0 1 0                
+
+        g Face
+        f 1 2 3
+                g      Hand
+        f 1 2 3  
+        g Face
+        f 1 2 3
+        f 3 2 1
+
+        """
+        res = geom_tools.from_obj_string(content, compute_normals=False, triangulate=False)
+        ans = geom_tools.Mesh(
+            vertices=np.array([
+                [0, 0, 0],
+                [1, 0, 0],
+                [0, 1, 0],
+            ]),
+            polygon_vertex_indices=[[0, 1, 2], [0, 1, 2], [0, 1, 2], [2, 1, 0]],
+            polygon_groups=[0, 1, 0, 0],
+            group_names=["Face", "Hand"]
+        )
+        self.assertTrue(res == ans)
+
+    def test_from_obj_string15(self):
+        content = """
+        v 0 0 0
+        v 1 0 0
+        v 0 1 0                
+        
+        f 1 2 3
+                g      Hand
+        f 1 2 3  
+        g Face
+        f 1 2 3
+        f 3 2 1
+
+        """
+        res = geom_tools.from_obj_string(content, compute_normals=False, triangulate=False)
+        ans = geom_tools.Mesh(
+            vertices=np.array([
+                [0, 0, 0],
+                [1, 0, 0],
+                [0, 1, 0],
+            ]),
+            polygon_vertex_indices=[[0, 1, 2], [0, 1, 2], [0, 1, 2], [2, 1, 0]],
+            polygon_groups=[-1, 0, 1, 1],
+            group_names=["Hand", "Face"]
         )
         self.assertTrue(res == ans)
 
