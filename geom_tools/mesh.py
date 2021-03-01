@@ -44,9 +44,7 @@ class Mesh:
         return len(self.vertices)
 
     def n_texture_vertices(self) -> int:
-        if self.has_uv():
-            return len(self.texture_vertices)
-        return 0
+        return len(self.texture_vertices) if self.has_uv() else 0
 
     def n_polygons(self) -> int:
         return len(self.polygon_vertex_indices)

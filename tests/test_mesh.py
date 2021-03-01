@@ -178,6 +178,18 @@ class TestMesh(unittest.TestCase):
         self.assertIsNone(mesh1.n_triangles())
         self.assertFalse(mesh1.is_triangulated())
 
+    def test_mesh_n_groups01(self):
+        mesh1 = Mesh(vertices=np.arange(5), polygon_vertex_indices=[[0, 1, 2]])
+        self.assertEqual(mesh1.n_groups(), 0)
+
+    def test_mesh_n_groups02(self):
+        mesh1 = Mesh(vertices=np.arange(5), polygon_vertex_indices=[[0, 1, 2]], group_names=["F"])
+        self.assertEqual(mesh1.n_groups(), 1)
+
+    def test_mesh_n_groups03(self):
+        mesh1 = Mesh(vertices=np.arange(5), polygon_vertex_indices=[[0, 1, 2]], group_names=["F", "U", "U"])
+        self.assertEqual(mesh1.n_groups(), 3)
+
     def test_mesh_bbox01(self):
         mesh1 = Mesh(
             vertices=np.array([[0, 1, 2], [-5, 2, 3]]), polygon_vertex_indices=[
