@@ -1,4 +1,4 @@
-from typing import Union, Optional
+from typing import Union, Optional, List
 import numpy as np
 
 from .utils import is_arrays_equal, is_arrays_equal_or_both_none
@@ -10,9 +10,9 @@ class Mesh:
     def __init__(
         self,
         vertices: np.ndarray,
-        polygon_vertex_indices: list,
-        texture_vertices: np.ndarray = None,
-        texture_polygon_vertex_indices: list = None,
+        polygon_vertex_indices: List[int],
+        texture_vertices: Optional[np.ndarray] = None,
+        texture_polygon_vertex_indices: Optional[List[int]] = None,
         normals: Optional[np.ndarray] = None,
         triangle_vertex_indices: Optional[np.ndarray] = None,
         triangle_texture_vertex_indices: Optional[np.ndarray] = None
@@ -43,7 +43,7 @@ class Mesh:
     def n_polygons(self) -> int:
         return len(self.polygon_vertex_indices)
 
-    def n_triangles(self) -> Union[int, None]:
+    def n_triangles(self) -> Optional[int]:
         if self.has_triangulated():
             return len(self.triangle_vertex_indices)
         else:
