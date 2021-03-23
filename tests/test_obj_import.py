@@ -492,6 +492,61 @@ class TestObjParser(unittest.TestCase):
         )
         self.assertTrue(res == ans)
 
+    def test_from_obj_string16(self):
+        content = """
+        v 0 0 0
+        v 1 0 0
+        v 0 1 0                
+
+        f 1 2 3
+        g
+        f 1 2 3  
+        g Face
+        f 1 2 3
+        f 3 2 1
+
+        """
+        res = geom_tools.from_obj_string(content, compute_normals=False, triangulate=False)
+        ans = geom_tools.Mesh(
+            vertices=np.array([
+                [0, 0, 0],
+                [1, 0, 0],
+                [0, 1, 0],
+            ]),
+            polygon_vertex_indices=[[0, 1, 2], [0, 1, 2], [0, 1, 2], [2, 1, 0]],
+            polygon_groups=[-1, -1, 0, 0],
+            group_names=["Face"]
+        )
+        self.assertTrue(res == ans)
+
+    def test_from_obj_string17(self):
+        content = """
+        v 0 0 0
+        v 1 0 0
+        v 0 1 0                
+
+        f 1 2 3
+        g
+        f 1 2 3  
+        g Face
+        f 1 2 3
+            g   
+        f 3 2 1
+
+        """
+        res = geom_tools.from_obj_string(content, compute_normals=False, triangulate=False)
+        ans = geom_tools.Mesh(
+            vertices=np.array([
+                [0, 0, 0],
+                [1, 0, 0],
+                [0, 1, 0],
+            ]),
+            polygon_vertex_indices=[[0, 1, 2], [0, 1, 2], [0, 1, 2], [2, 1, 0]],
+            polygon_groups=[-1, -1, 0, -1],
+            group_names=["Face"]
+        )
+        self.assertTrue(res == ans)
+
     def test_file_not_found01(self):
         self.assertRaises(FileNotFoundError, geom_tools.load, "123")
 

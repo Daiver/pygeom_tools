@@ -76,6 +76,9 @@ def from_obj_string(string, triangulate=True, compute_normals=True):
                 texture_polygon_vertex_indices.append(texture_face)
             polygon_groups.append(last_group_ind)
         elif tokens[0] == "g":
+            if len(tokens) == 1:
+                last_group_ind = -1
+                continue
             group_name = tokens[1]
             if group_name not in group_names:
                 group_names[group_name] = len(group_names)
