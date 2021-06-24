@@ -23,3 +23,4 @@ from .adjacency_tools import vertices_adjacency_from_polygon_vertex_indices
 from .utils import center_of_vertices
 
 from .rigid_alignment import rigid_alignment_transformation
+from .normals_tools import compute_vertices_normals_from_triangles
