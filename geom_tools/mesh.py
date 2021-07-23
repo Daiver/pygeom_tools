@@ -1,4 +1,5 @@
 from typing import Optional, List
+import copy
 import numpy as np
 
 from .utils import is_arrays_equal, is_arrays_equal_or_both_none, triangulate_polygons
@@ -117,6 +118,9 @@ class Mesh:
 
     def bbox(self) -> BoundingBox:
         return from_vertices(self.vertices)
+
+    def clone(self) -> "Mesh":
+        return copy.deepcopy(self)
 
     def set_vertices_and_compute_normals(self, vertices: np.ndarray):
         assert self.is_triangulated()

@@ -294,3 +294,31 @@ class TestMesh(unittest.TestCase):
         res = mesh2.normals
         self.assertEqual(ans.shape, res.shape)
         self.assertTrue(np.allclose(ans, res))
+
+    def test_clone01(self):
+        mesh_input = Mesh(
+            vertices=np.arange(3), polygon_vertex_indices=[[0, 1, 2, 4], [0, 1, 2, 4]],
+            polygon_groups=[1, 0], group_names=["R", "Left"]
+        )
+        mesh_ans = Mesh(
+            vertices=np.arange(3), polygon_vertex_indices=[[0, 1, 2, 4], [0, 1, 2, 4]],
+            polygon_groups=[1, 0], group_names=["R", "Left"]
+        )
+        mesh_res = mesh_input.clone()
+        mesh_input.vertices[:] = 0
+        self.assertEqual(mesh_ans, mesh_res)
+        self.assertNotEqual(mesh_input, mesh_res)
+
+    def test_clone02(self):
+        mesh_input = Mesh(
+            vertices=np.arange(3), polygon_vertex_indices=[[0, 1, 2, 4]],
+            triangle_vertex_indices=np.array([[0, 1, 2], [0, 2, 4]])
+        )
+        mesh_ans = Mesh(
+            vertices=np.arange(3), polygon_vertex_indices=[[0, 1, 2, 4]],
+            triangle_vertex_indices=np.array([[0, 1, 2], [0, 2, 4]])
+        )
+        mesh_res = mesh_input.clone()
+        mesh_input.vertices[:] = 0
+        self.assertEqual(mesh_ans, mesh_res)
+        self.assertNotEqual(mesh_input, mesh_res)
