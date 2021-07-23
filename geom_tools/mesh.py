@@ -124,3 +124,4 @@ class Mesh:
         assert vertices.shape == self.vertices.shape
         self.vertices = vertices
         self.normals = compute_vertices_normals_from_triangles(self.vertices, self.triangle_vertex_indices)
+        return self

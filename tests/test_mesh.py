@@ -263,3 +263,34 @@ class TestMesh(unittest.TestCase):
         res = mesh.normals
         self.assertEqual(ans.shape, res.shape)
         self.assertTrue(np.allclose(ans, res))
+
+    def test_set_vertices_and_compute_normals03(self):
+        mesh = Mesh(
+            vertices=np.array([
+                [0, 0, 0],
+                [0, 0, 0],
+                [0, 0, 0],
+            ]),
+            polygon_vertex_indices=[
+                [0, 1, 2]
+            ],
+            triangle_vertex_indices=np.array([
+                [0, 1, 2]
+            ]),
+        )
+        new_vertices = np.array([
+            [0, 0, 0],
+            [1, 0, 0],
+            [0, 1, 0],
+        ])
+        ans = np.array([
+            [0, 0, 1],
+            [0, 0, 1],
+            [0, 0, 1],
+        ], dtype=np.float32)
+        self.assertFalse(mesh.has_normals())
+        mesh2 = mesh.set_vertices_and_compute_normals(new_vertices)
+
+        res = mesh2.normals
+        self.assertEqual(ans.shape, res.shape)
+        self.assertTrue(np.allclose(ans, res))
