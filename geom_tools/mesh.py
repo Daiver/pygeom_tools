@@ -1,8 +1,9 @@
-from typing import Union, Optional, List
+from typing import Optional, List
 import numpy as np
 
-from .utils import is_arrays_equal, is_arrays_equal_or_both_none
+from .utils import is_arrays_equal, is_arrays_equal_or_both_none, triangulate_polygons
 from .bounding_box import from_vertices, BoundingBox
+from .normals_tools import compute_vertices_normals_from_triangles
 
 
 # TODO: asserts for consistent texture information
@@ -116,3 +117,10 @@ class Mesh:
 
     def bbox(self) -> BoundingBox:
         return from_vertices(self.vertices)
+
+    def set_vertices_and_compute_normals(self, vertices: np.ndarray):
+        assert self.is_triangulated()
+        assert vertices.ndim == 2
+        assert vertices.shape == self.vertices.shape
+        self.vertices = vertices
+        self.normals = compute_vertices_normals_from_triangles(self.vertices, self.triangle_vertex_indices)

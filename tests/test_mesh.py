@@ -198,3 +198,68 @@ class TestMesh(unittest.TestCase):
             ])
         bbox = mesh1.bbox()
         self.assertEqual(BoundingBox([-5, 1, 2], [0, 2, 3]), bbox)
+
+    def test_set_vertices_and_compute_normals01(self):
+        mesh = Mesh(
+            vertices=np.array([
+                [0, 0, 0],
+                [0, 0, 0],
+                [0, 0, 0],
+            ]),
+            polygon_vertex_indices=[
+                [0, 1, 2]
+            ],
+            triangle_vertex_indices=np.array([
+                [0, 1, 2]
+            ]),
+        )
+        new_vertices = np.array([
+            [0, 0, 0],
+            [1, 0, 0],
+            [0, 1, 0],
+        ])
+        ans = np.array([
+            [0, 0, 1],
+            [0, 0, 1],
+            [0, 0, 1],
+        ], dtype=np.float32)
+        self.assertFalse(mesh.has_normals())
+        mesh.set_vertices_and_compute_normals(new_vertices)
+
+        res = mesh.normals
+        self.assertEqual(ans.shape, res.shape)
+        self.assertTrue(np.allclose(ans, res))
+
+    def test_set_vertices_and_compute_normals02(self):
+        new_vertices = np.array([
+            [0.1, 0, 0],
+            [0, 50, 0],
+            [1, 0, 0],
+            [0, 0, 1],
+            [0, 0, 0],
+        ], dtype=np.float32)
+
+        mesh = Mesh(
+            vertices=np.zeros_like(new_vertices),
+            polygon_vertex_indices=[
+                [1, 0, 4],
+                [4, 2, 3],
+            ],
+            triangle_vertex_indices=np.array([
+                [1, 0, 4],
+                [4, 2, 3],
+            ], dtype=np.int32),
+        )
+        ans = np.array([
+            [0, 0, -1],
+            [0, 0, -1],
+            [0, -1, 0],
+            [0, -1, 0],
+            [0, -0.70710678, -0.70710678],
+        ], dtype=np.float32)
+        self.assertFalse(mesh.has_normals())
+        mesh.set_vertices_and_compute_normals(new_vertices)
+
+        res = mesh.normals
+        self.assertEqual(ans.shape, res.shape)
+        self.assertTrue(np.allclose(ans, res))

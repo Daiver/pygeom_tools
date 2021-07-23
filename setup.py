@@ -48,11 +48,11 @@ setuptools.setup(
     long_description="",
     long_description_content_type="text/markdown",
     url="",
-    packages=setuptools.find_packages(exclude=("tests",)),
-    classifiers=(
+    packages=setuptools.find_packages(exclude=["tests",]),
+    classifiers=[
         "Programming Language :: Python :: 3",
         "Operating System :: OS Independent",
-    ),
+    ],
     ext_modules=ext_modules,
     install_requires=['pybind11>=2.4'],
     setup_requires=['pybind11>=2.4'],
