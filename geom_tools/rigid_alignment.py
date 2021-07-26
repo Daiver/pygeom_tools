@@ -5,10 +5,7 @@ from .utils import center_of_vertices
 from .transformations import translated
 
 
-def rigid_alignment_transformation(
-        src: np.ndarray,
-        dst: np.ndarray
-) -> Tuple[np.ndarray, np.ndarray]:
+def find_rotation_and_translation(src: np.ndarray, dst: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
     assert src.ndim == 2
     assert src.shape == dst.shape
     src_center = center_of_vertices(src)
@@ -16,11 +13,15 @@ def rigid_alignment_transformation(
 
     src_centered = translated(src_center, src)
     dst_centered = translated(dst_center, dst)
-    cov_mat = src_centered.T @ dst_centered
+    cov_mat = cov_mat_from_vertices(src_centered, dst_centered)
 
     rotation = rot_mat_from_cov_mat(cov_mat)
     translation = dst_center - rotation @ src_center
     return rotation, translation
+
+
+def cov_mat_from_vertices(src: np.ndarray, dst: np.ndarray) -> np.ndarray:
+    return src.T @ dst
 
 
 def rot_mat_from_cov_mat(cov_mat: np.ndarray) -> np.ndarray:

@@ -1,4 +1,4 @@
-from typing import List, Union
+from typing import List, Union, Any
 import numpy as np
 
 
@@ -22,7 +22,7 @@ def is_arrays_equal_or_both_none(
     return (a is None) and (b is None)
 
 
-def is_none_or_ndarray(variable: Union[None, np.ndarray], required_dtype: np.dtype = None) -> bool:
+def is_none_or_ndarray(variable: Any, required_dtype: np.dtype = None) -> bool:
     if variable is None:
         return True
     if not isinstance(variable, np.ndarray):
@@ -41,10 +41,18 @@ def triangulate_polygons(polygon_vertex_indices: List[List[int]]) -> List[List[i
     return res
 
 
-def center_of_vertices(
-        vertices: Union[List[List[float]], np.ndarray]
-) -> np.ndarray:
-    vertices = np.array(vertices)
+def center_of_vertices(vertices: np.ndarray) -> np.ndarray:
     assert vertices.ndim == 2
     assert vertices.shape[0] > 0
     return vertices.mean(axis=0)
+
+
+def center_of_vertices_weighted(vertices: np.ndarray, weights: np.ndarray) -> np.ndarray:
+    assert vertices.ndim == 2
+    assert vertices.shape[0] > 0
+    assert weights.ndim == 1
+    assert vertices.shape[0] == weights.shape[0]
+    sum_of_weights = weights.sum()
+    if sum_of_weights == 0.0:
+        sum_of_weights = 1.0
+    return (vertices * weights[:, None]).sum(axis=0) / sum_of_weights

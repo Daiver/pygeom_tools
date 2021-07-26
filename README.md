@@ -164,18 +164,18 @@ res = geom_tools.translated(
 import geom_tools
 
 rotation = [
-    [0, -1, 0],
-    [1, 0, 0],
-    [0, 0, 1]
+   [0, -1, 0],
+   [1, 0, 0],
+   [0, 0, 1]
 ]
 center = [0, 2, 0]
 transformation = geom_tools.rotation_around_vertex(rotation, center, translation=[1, 2, 6])
 vertices = [
-    [1, 0, 0],
-    [0, 1, 0],
-    [0, 0, 1],
+   [1, 0, 0],
+   [0, 1, 0],
+   [0, 0, 1],
 ]
-res = geom_tools.transform_vertices(transformation, vertices)
+res = geom_tools.rigid_alignment.find_rotation_and_translation(transformation, vertices)
 # res = [
 #     [3, 5, 6],
 #     [2, 4, 6],

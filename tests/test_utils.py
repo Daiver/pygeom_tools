@@ -68,6 +68,7 @@ class TestUtils(unittest.TestCase):
         vertices = [
             [0, 0, 0]
         ]
+        vertices = np.array(vertices, dtype=np.float32)
         ans = [0, 0, 0]
         res = geom_tools.utils.center_of_vertices(vertices)
         self.assertTrue(geom_tools.utils.is_arrays_equal(ans, res))
@@ -77,6 +78,7 @@ class TestUtils(unittest.TestCase):
             [0, 0],
             [1, 0]
         ]
+        vertices = np.array(vertices, dtype=np.float32)
         ans = [0.5, 0]
         res = geom_tools.utils.center_of_vertices(vertices)
         self.assertTrue(geom_tools.utils.is_arrays_equal(ans, res))
@@ -87,6 +89,7 @@ class TestUtils(unittest.TestCase):
             [1, 0],
             [2, 0.3]
         ]
+        vertices = np.array(vertices, dtype=np.float32)
         ans = [1.0, 0.1]
         res = geom_tools.utils.center_of_vertices(vertices)
         self.assertTrue(geom_tools.utils.is_arrays_equal(ans, res))
@@ -97,8 +100,49 @@ class TestUtils(unittest.TestCase):
             [1, 0, 1],
             [2, -0.3, 2]
         ]
+        vertices = np.array(vertices, dtype=np.float32)
         ans = [1.0, -0.1, 2]
         res = geom_tools.utils.center_of_vertices(vertices)
+        self.assertTrue(geom_tools.utils.is_arrays_equal(ans, res))
+
+    def test_center_of_vertices_weighted01(self):
+        vertices = np.array([
+            [0, 0, 0]
+        ], dtype=np.float32)
+        weights = np.array([1], dtype=np.float32)
+        ans = [0, 0, 0]
+        res = geom_tools.utils.center_of_vertices_weighted(vertices, weights)
+        self.assertTrue(geom_tools.utils.is_arrays_equal(ans, res))
+
+    def test_center_of_vertices_weighted02(self):
+        vertices = np.array([
+            [0, 2, 50],
+            [1, 2, 3],
+            [6, 7, 8],
+        ], dtype=np.float32)
+        weights = np.array([0, 1, 0], dtype=np.float32)
+        ans = [1, 2, 3]
+        res = geom_tools.utils.center_of_vertices_weighted(vertices, weights)
+        self.assertTrue(geom_tools.utils.is_arrays_equal(ans, res))
+
+    def test_center_of_vertices_weighted03(self):
+        vertices = np.array([
+            [1, 2, 3],
+            [3, 2, 3],
+        ], dtype=np.float32)
+        weights = np.array([2, 2], dtype=np.float32)
+        ans = [2, 2, 3]
+        res = geom_tools.utils.center_of_vertices_weighted(vertices, weights)
+        self.assertTrue(geom_tools.utils.is_arrays_equal(ans, res))
+
+    def test_center_of_vertices_weighted04(self):
+        vertices = np.array([
+            [1, 2, 3],
+            [4, 2, 3],
+        ], dtype=np.float32)
+        weights = np.array([2, 0.5], dtype=np.float32)
+        ans = [1.6, 2, 3]
+        res = geom_tools.utils.center_of_vertices_weighted(vertices, weights)
         self.assertTrue(geom_tools.utils.is_arrays_equal(ans, res))
 
 
