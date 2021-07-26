@@ -1,4 +1,4 @@
-from typing import Union, List, Tuple
+from typing import Tuple
 import numpy as np
 
 from .utils import center_of_vertices
@@ -6,11 +6,9 @@ from .transformations import translated
 
 
 def rigid_alignment_transformation(
-        src: Union[List[List[float]], np.ndarray],
-        dst: Union[List[List[float]], np.ndarray]
+        src: np.ndarray,
+        dst: np.ndarray
 ) -> Tuple[np.ndarray, np.ndarray]:
-    src = np.array(src)
-    dst = np.array(dst)
     assert src.ndim == 2
     assert src.shape == dst.shape
     src_center = center_of_vertices(src)
@@ -31,5 +29,3 @@ def rot_mat_from_cov_mat(cov_mat: np.ndarray) -> np.ndarray:
     sigma = np.eye(cov_mat.shape[0])
     sigma[-1, -1] = d
     return v.T @ sigma @ u.T
-
-

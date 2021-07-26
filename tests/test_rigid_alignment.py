@@ -1,5 +1,7 @@
 import unittest
 
+import numpy as np
+
 import geom_tools
 
 
@@ -15,6 +17,8 @@ class TestRigidAlignment(unittest.TestCase):
             [0, 1, 0],
             [0, 0, 1],
         ]
+        src = np.array(src)
+        dst = np.array(dst)
         transformation = geom_tools.rigid_alignment_transformation(src, dst)
         res = geom_tools.transform_vertices(transformation, src)
         self.assertTrue(geom_tools.utils.is_arrays_equal(res, dst))
@@ -38,6 +42,8 @@ class TestRigidAlignment(unittest.TestCase):
             [0, 0, 2],
             [0, 0, -2],
         ]
+        src = np.array(src)
+        dst = np.array(dst)
         transformation = geom_tools.rigid_alignment_transformation(src, dst)
         res = geom_tools.transform_vertices(transformation, src)
         self.assertTrue(geom_tools.utils.is_arrays_equal(ans, res))
@@ -61,6 +67,8 @@ class TestRigidAlignment(unittest.TestCase):
             [0, 0, 2],
             [0, 0, -2],
         ]
+        src = np.array(src)
+        dst = np.array(dst)
         transformation = geom_tools.rigid_alignment_transformation(src, dst)
         res = geom_tools.transform_vertices(transformation, src)
         self.assertTrue(geom_tools.utils.is_arrays_equal(ans, res))
