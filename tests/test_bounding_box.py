@@ -6,22 +6,22 @@ from geom_tools.bounding_box import BoundingBox, from_vertices
 
 
 class TestBoundingBox(unittest.TestCase):
-    def test_from_eq01(self):
+    def test_eq01(self):
         b1 = BoundingBox([0, 0, 0], [1, 1, 1])
         b2 = BoundingBox([0, 0, 0], [1, 1, 1])
         self.assertEqual(b1, b2)
 
-    def test_from_eq02(self):
+    def test_eq02(self):
         b1 = BoundingBox([1, 5, -5], [6, 13, -4])
         b2 = BoundingBox([1, 5, -5], [6, 13, -4])
         self.assertEqual(b1, b2)
 
-    def test_from_eq03(self):
+    def test_eq03(self):
         b1 = BoundingBox([1, 5, -5], [6, 13, -4])
         b2 = BoundingBox([0, 5, -5], [6, 13, -4])
         self.assertNotEqual(b1, b2)
 
-    def test_from_eq04(self):
+    def test_eq04(self):
         b1 = BoundingBox([1, 5, -5], [6, 13, -4])
         b2 = BoundingBox([1, 5, -5], [6, 103, -4])
         self.assertNotEqual(b1, b2)
