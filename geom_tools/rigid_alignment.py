@@ -11,8 +11,8 @@ def find_rotation_and_translation(src: np.ndarray, dst: np.ndarray) -> Tuple[np.
     src_center = center_of_vertices(src)
     dst_center = center_of_vertices(dst)
 
-    src_centered = translated(src_center, src)
-    dst_centered = translated(dst_center, dst)
+    src_centered = translated(-src_center, src)
+    dst_centered = translated(-dst_center, dst)
     cov_mat = cov_mat_from_vertices(src_centered, dst_centered)
 
     rotation = rot_mat_from_cov_mat(cov_mat)
@@ -31,8 +31,8 @@ def find_rotation_and_translation_weighted(
     src_center = center_of_vertices_weighted(src, weights)
     dst_center = center_of_vertices_weighted(dst, weights)
 
-    src_centered = translated(src_center, src)
-    dst_centered = translated(dst_center, dst)
+    src_centered = translated(-src_center, src)
+    dst_centered = translated(-dst_center, dst)
     cov_mat = cov_mat_from_vertices_weighted(src_centered, dst_centered, weights)
 
     rotation = rot_mat_from_cov_mat(cov_mat)
