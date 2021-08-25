@@ -27,3 +27,15 @@ def vertices_adjacency_from_polygon_vertex_indices(
 def max_vertex_ind_in_list(indices: List[List[int]]) -> int:
     flat_indices_generator = (item for sublist in indices for item in sublist)
     return max(flat_indices_generator)
+
+
+def expand_adjacency_table(adjacency_table: List[List[int]]) -> List[List[int]]:
+    res = []
+    for vertex_ind, vertex_adj_list in enumerate(adjacency_table):
+        res_set = set(vertex_adj_list)
+        for other_vertex_ind in vertex_adj_list:
+            res_set.update(adjacency_table[other_vertex_ind])
+        res_set.remove(vertex_ind)
+        res_list = sorted(res_set)
+        res.append(res_list)
+    return res

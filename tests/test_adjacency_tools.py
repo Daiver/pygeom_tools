@@ -2,7 +2,8 @@ import unittest
 
 from geom_tools.adjacency_tools import (
     vertices_adjacency_from_polygon_vertex_indices,
-    max_vertex_ind_in_list
+    max_vertex_ind_in_list,
+    expand_adjacency_table,
 )
 
 
@@ -151,6 +152,64 @@ class TestAdjacencyTools(unittest.TestCase):
     def test_max_vertex_ind_in_list04(self):
         indices = [[1, 2, 3, 4], [6, 50], [1, 0, 3]]
         self.assertEqual(50, max_vertex_ind_in_list(indices))
+
+    def test_expand_adjacency_table01(self):
+        adj_table = [
+
+        ]
+        ans = [
+
+        ]
+        res = expand_adjacency_table(adj_table)
+        self.assertEqual(ans, res)
+
+    def test_expand_adjacency_table02(self):
+        adj_table = [
+            [1],
+            [0],
+        ]
+        ans = [
+            [1],
+            [0],
+        ]
+        res = expand_adjacency_table(adj_table)
+        self.assertEqual(ans, res)
+
+    def test_expand_adjacency_table03(self):
+        adj_table = [
+            [1],
+            [0, 2],
+            [1],
+        ]
+        ans = [
+            [1, 2],
+            [0, 2],
+            [0, 1]
+        ]
+        res = expand_adjacency_table(adj_table)
+        self.assertEqual(ans, res)
+
+    def test_expand_adjacency_table04(self):
+        adj_table = [
+            [1],
+            [0],
+
+            [3],  # 2
+            [2, 4],  # 3
+            [3, 5],  # 4
+            [4]  # 5
+        ]
+        ans = [
+            [1],
+            [0],
+
+            [3, 4],  # 2
+            [2, 4, 5],  # 3
+            [2, 3, 5],  # 4
+            [3, 4]  # 5
+        ]
+        res = expand_adjacency_table(adj_table)
+        self.assertEqual(ans, res)
 
 
 if __name__ == '__main__':
