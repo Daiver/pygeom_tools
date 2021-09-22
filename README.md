@@ -15,11 +15,13 @@ model = geom_tools.load(path_to_obj)
 # Or, if you want to load only vertices:
 # vertices = geom_tools.load_vertices(path_to_obj)  # Super fast due to C++ extension
 # Print various statistics 
-print(f"Model loaded, "
-      f"n vertices: {model.n_vertices()}, "
-      f"n vts: {model.n_texture_vertices()}, "
-      f"n polygons: {model.n_polygons()}, "
-      f"n triangles: {model.n_triangles()}")
+print(
+    f"Model loaded, "
+    f"n vertices: {model.n_vertices()}, "
+    f"n vts: {model.n_texture_vertices()}, "
+    f"n polygons: {model.n_polygons()}, "
+    f"n triangles: {model.n_triangles()}"
+)
 # or simply
 print(model.summary())
 print(model.vertices[:5])  # NumPy array, same for texture vertices, etc
