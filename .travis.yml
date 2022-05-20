@@ -1,7 +1,5 @@
 dist: trusty
-language:
-  - cpp
-  - python
+language: python
 addons:
   apt:
     sources:
@@ -21,13 +19,11 @@ matrix:
   - python: 3.8
   - python: 3.9
 
-script:
+install:
   - export CC=gcc-7
   - export CXX=g++-7
-
-install:
-- pip install --upgrade pip pytest -r requirements.txt
-- pip install -e .
+  - pip install --upgrade pip pytest -r requirements.txt
+  - pip install -e .
 
 script:
 - pytest
