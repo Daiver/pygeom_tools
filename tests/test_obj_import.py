@@ -765,6 +765,41 @@ class TestObjParser(unittest.TestCase):
         ])
         self.assertTrue(is_arrays_equal(ans_vertices, vertices))
 
+    def test_load_vertices10(self):
+        content = """
+        v Hi! 0 0
+        v 16   3 2.2
+        v 0 1 0
+        v 0 0 1
+
+        vt 0.5 0 0
+        vt 0.5 0.5 0 
+        vt 0 0.5 0
+
+        f 1/1 2/2 3/3 4/1
+        g something useful
+        f 2/1 3/2 4/3
+
+        """
+        self.assertRaises(ValueError, geom_tools.obj_import.from_obj_string_vertices, content)
+
+    def test_load_vertices11(self):
+        content = """
+        v 5 3
+
+        """
+        self.assertRaises(ValueError, geom_tools.obj_import.from_obj_string_vertices, content)
+
+    def test_load_vertices12(self):
+        content = """
+        v 5 2"""
+        self.assertRaises(ValueError, geom_tools.obj_import.from_obj_string_vertices, content)
+
+    def test_load_vertices13(self):
+        content = """
+        v 5 2 """
+        self.assertRaises(ValueError, geom_tools.obj_import.from_obj_string_vertices, content)
+
 
 if __name__ == '__main__':
     unittest.main()

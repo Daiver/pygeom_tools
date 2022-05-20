@@ -24,6 +24,8 @@ def from_obj_file_vertices(file_name: str) -> np.ndarray:
 
 def from_obj_string_vertices(string: str) -> np.ndarray:
     flat_vertices = obj_import_cpp.read_flat_vertices_from_string(string)
+    if flat_vertices is None:
+        raise ValueError("Cannot read file")
     assert len(flat_vertices) % 3 == 0
     return np.array(flat_vertices).reshape(-1, 3)
 
