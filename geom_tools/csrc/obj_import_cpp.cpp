@@ -14,14 +14,13 @@ inline void iterateStreamUntilNonEmpty(
     std::istringstream &lineStream,
     std::string &tokenBuffer)
 {
-    while(std::getline(lineStream, tokenBuffer, spaceDelim))
-        if(tokenBuffer.size() > 0)
+    while (std::getline(lineStream, tokenBuffer, spaceDelim))
+        if (tokenBuffer.size() > 0)
             break;
 }
 
 
 inline void readVertex3D(
-    const std::string &line,
     std::istringstream &lineStream,
     std::string &token,
     std::vector<float> &vertices)
@@ -43,16 +42,16 @@ std::vector<float> readFlatVerticesFromString(const std::string &allLines)
 
     std::string tokenBuffer;
 
-    for(std::string line; std::getline(linesStream, line); ){
+    for (std::string line; std::getline(linesStream, line); ) {
         std::istringstream lineStream(line);
 
         iterateStreamUntilNonEmpty(lineStream, tokenBuffer);
 
-        if(tokenBuffer.size() < 1)
+        if (tokenBuffer.size() < 1)
             continue;
 
-        if((tokenBuffer[0] == 'v') && (tokenBuffer.size() == 1))
-            readVertex3D(line, lineStream, tokenBuffer, vertices);
+        if ((tokenBuffer[0] == 'v') && (tokenBuffer.size() == 1))
+            readVertex3D(lineStream, tokenBuffer, vertices);
     }
 
     return vertices;
@@ -60,6 +59,5 @@ std::vector<float> readFlatVerticesFromString(const std::string &allLines)
 
 
 PYBIND11_MODULE(obj_import_cpp, m) {
-    m.def("read_flat_vertices", &readFlatVerticesFromString, "");
-
+    m.def("read_flat_vertices_from_string", &readFlatVerticesFromString, "");
 }
