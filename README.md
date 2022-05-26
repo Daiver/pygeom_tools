@@ -69,7 +69,7 @@ I prefer latest versions of interpreter/libraries but please let me know if you 
 ## Pip
 
 ```
-pip3 install geom_tools
+pip3 install geom-tools
 ```
 
 ## Manual
