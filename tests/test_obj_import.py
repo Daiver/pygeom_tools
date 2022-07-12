@@ -565,7 +565,8 @@ class TestObjParser(unittest.TestCase):
             [1, 0, 0],
             [0, 1, 0],
             [0, 0, 1]
-        ])
+        ], dtype=np.float32)
+        self.assertEqual(vertices.dtype, np.float32)
         self.assertTrue(is_arrays_equal(ans_vertices, vertices))
 
     def test_load_vertices02(self):

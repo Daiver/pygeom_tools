@@ -27,7 +27,7 @@ def from_obj_string_vertices(string: str) -> np.ndarray:
     if flat_vertices is None:
         raise ValueError("Cannot read file")
     assert len(flat_vertices) % 3 == 0
-    return np.array(flat_vertices).reshape(-1, 3)
+    return np.array(flat_vertices, dtype=np.float32).reshape(-1, 3)
 
 
 # Currently normals are not supported
