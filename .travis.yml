@@ -22,7 +22,7 @@ matrix:
 install:
   - export CC=gcc-7
   - export CXX=g++-7
-  - pip install --upgrade pip pytest 
+  - pip install --upgrade pip pytest setuptools wheel
   - pip install -e .
 
 script:
