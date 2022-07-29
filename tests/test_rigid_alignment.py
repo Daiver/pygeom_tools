@@ -180,7 +180,7 @@ class TestRigidAlignment(unittest.TestCase):
             [0, 1, 0],
             [-1, 0, 0],
             [0, 0, 1]
-        ], dtype=np.float)
+        ], dtype=np.float32)
         res_rot, res_trans = geom_tools.rigid_alignment.find_rotation_and_translation_weighted(
             vertices1, vertices2, weights
         )
