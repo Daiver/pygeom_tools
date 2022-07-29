@@ -1,6 +1,6 @@
 # pygeom_tools
 
-[![Build Status](https://travis-ci.com/Daiver/pygeom_tools.svg?branch=master)](https://travis-ci.com/Daiver/pygeom_tools)
+[![Build Status](https://travis-ci.com/Daiver/pygeom_tools.svg?branch=master)](https://app.travis-ci.com/github/Daiver/pygeom_tools)
 
 [WIP] Simple tools for wavefront obj IO and processing.
 
