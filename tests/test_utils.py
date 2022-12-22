@@ -32,7 +32,7 @@ class TestUtils(unittest.TestCase):
         faces = [
             [5, 3, 5]
         ]
-        res = geom_tools.utils.triangulate_polygons(faces)
+        res = geom_tools.utils.triangulate_polygons(faces).tolist()
         ans = [[5, 3, 5]]
         self.assertTrue(res == ans)
 
@@ -40,7 +40,7 @@ class TestUtils(unittest.TestCase):
         faces = [
             [5, 3, 6, 5]
         ]
-        res = geom_tools.utils.triangulate_polygons(faces)
+        res = geom_tools.utils.triangulate_polygons(faces).tolist()
         ans = [
             [5, 3, 6],
             [5, 6, 5],
@@ -53,7 +53,7 @@ class TestUtils(unittest.TestCase):
             [0, 3, 4],
             [1, 2, 3, 4]
         ]
-        res = geom_tools.utils.triangulate_polygons(faces)
+        res = geom_tools.utils.triangulate_polygons(faces).tolist()
         ans = [
             [11, 5, 3],
             [11, 3, 6],

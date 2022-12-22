@@ -30,13 +30,21 @@ def is_none_or_ndarray(variable: Any, required_dtype: np.dtype = None) -> bool:
     return (required_dtype is None) or (variable.dtype == required_dtype)
 
 
-def triangulate_polygons(polygon_vertex_indices: List[List[int]]) -> List[List[int]]:
-    res = []
+def triangulate_polygons(polygon_vertex_indices: List[List[int]]) -> np.ndarray:
+    n_all_vertices_in_polygons = 0
+    for polygon in polygon_vertex_indices:
+        n_vertices = len(polygon)
+        assert n_vertices >= 3
+        n_all_vertices_in_polygons += n_vertices - 2
+
+    res = np.zeros((n_all_vertices_in_polygons, 3), dtype=np.int32)
+    counter = 0
     for polygon in polygon_vertex_indices:
         n_vertices = len(polygon)
         assert n_vertices >= 3
         for i in range(n_vertices - 2):
-            res.append([polygon[0], polygon[i + 1], polygon[i + 2]])
+            res[counter] = [polygon[0], polygon[i + 1], polygon[i + 2]]
+            counter += 1
 
     return res
 

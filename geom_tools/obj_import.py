@@ -98,10 +98,9 @@ def from_obj_string(string, triangulate=True, compute_normals=True):
     triangle_texture_vertex_indices = None
 
     if triangulate:
-        triangle_vertex_indices = np.array(triangulate_polygons(polygon_vertex_indices), dtype=np.int32)
+        triangle_vertex_indices = triangulate_polygons(polygon_vertex_indices)
         if texture_vertices is not None:
-            triangle_texture_vertex_indices = \
-                np.array(triangulate_polygons(texture_polygon_vertex_indices), dtype=np.int32)
+            triangle_texture_vertex_indices = triangulate_polygons(texture_polygon_vertex_indices)
         if compute_normals:
             normals = compute_vertices_normals_from_triangles(vertices, triangle_vertex_indices)
 
