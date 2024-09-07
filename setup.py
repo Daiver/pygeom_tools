@@ -26,6 +26,13 @@ class GetPybindInclude(object):
         return pybind11.get_include(self.user)
 
 
+if sys.platform == 'win32':
+    extra_compile_args = ['/std:c++17']  # MSVC flag for C++17
+    extra_link_args = []  # Additional linker args for Windows if needed
+else:
+    extra_compile_args = ['-std=c++17']  # GCC/Clang flag for C++17
+    extra_link_args = []  # Additional linker args for Linux if needed
+
 ext_modules = [
     setuptools.Extension(
         'geom_tools.obj_import_cpp',
@@ -35,7 +42,8 @@ ext_modules = [
             GetPybindInclude(user=True)
         ],
         language='c++',
-        extra_compile_args=['-std=c++17'],
+        extra_compile_args=extra_compile_args,
+        extra_link_args=extra_link_args,
     ),
 ]
 
